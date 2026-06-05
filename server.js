@@ -18,7 +18,8 @@ const isProd = process.env.NODE_ENV === 'production'
 
 // Security & performance middleware
 app.use(helmet({
-  contentSecurityPolicy: isProd ? undefined : false,
+  contentSecurityPolicy: false, // CSP disabled — GSAP requires eval() and inline execution
+  crossOriginEmbedderPolicy: false,
 }))
 app.use(cors({
   origin: isProd ? false : ['http://localhost:5173', 'http://localhost:4173'],

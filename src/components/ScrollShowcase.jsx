@@ -65,9 +65,9 @@ export default function ScrollShowcase() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=400%',
+          end: '+=250%',
           pin: true,
-          scrub: 1.5,
+          scrub: 1.2,
           anticipatePin: 1,
         },
       })
@@ -110,8 +110,8 @@ export default function ScrollShowcase() {
     <section
       id="showcase"
       ref={sectionRef}
-      className="relative w-full h-screen bg-[#060606] overflow-hidden"
-      style={{ perspective: '1200px' }}
+      className="relative w-full h-screen bg-[#060606]"
+      style={{ perspective: '1200px', clipPath: 'inset(0)' }}
     >
       {/* Label */}
       <div
