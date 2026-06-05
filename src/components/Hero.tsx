@@ -40,14 +40,13 @@ export default function Hero() {
             <p ref={labelRef} className="font-script text-2xl text-blush mb-4">Welcome to</p>
 
             <h1 ref={headingRef} className="font-serif font-light text-warm-brown leading-[1.05] mb-6" style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)' }}>
-              Capturing Your<br />
-              Little One&apos;s<br />
-              <em className="italic">Magic</em>
+              Because They<br />
+              Won&apos;t Stay This<br />
+              <em className="italic">Little Forever</em>
             </h1>
 
             <p ref={descRef} className="text-warm-mid font-light text-lg leading-relaxed max-w-lg mb-8">
-              Specialising in newborn, baby, kids &amp; maternity photography across India.
-              Every session is crafted with warmth, patience, and love.
+              Luxury maternity, newborn and family photography. Timeless images, heartfelt storytelling, and beautifully preserved memories for growing families.
             </p>
 
             <div ref={btnsRef} className="flex flex-col sm:flex-row items-start gap-4 mb-8">
