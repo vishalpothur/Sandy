@@ -4,31 +4,34 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #080808; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-::selection { background: #c9a96e40; color: #c9a96e; }
+body { background: #fdfaf7; color: #3d2c2c; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+::selection { background: #e8a59840; color: #c97b5a; }
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: #c9a96e; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #f5f0eb; }
+::-webkit-scrollbar-thumb { background: #c97b5a; border-radius: 2px; }
 
-.text-gold { color: #c9a96e; }
-.border-gold { border-color: #c9a96e; }
-.bg-gold { background: #c9a96e; }
+.text-terra { color: #c97b5a; }
+.text-blush { color: #e8a598; }
+.text-sage { color: #8fa68d; }
+.border-terra { border-color: #c97b5a; }
+.bg-terra { background: #c97b5a; }
 .font-serif { font-family: 'Cormorant Garamond', serif; }
+.font-script { font-family: 'Dancing Script', cursive; }
 
-.gold-underline {
+.terra-underline {
   position: relative;
 }
-.gold-underline::after {
+.terra-underline::after {
   content: '';
   position: absolute;
   bottom: -4px;
   left: 0;
   width: 0;
   height: 1px;
-  background: #c9a96e;
+  background: #c97b5a;
   transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.gold-underline:hover::after { width: 100%; }
+.terra-underline:hover::after { width: 100%; }
 
 img[loading="lazy"] { opacity: 0; transition: opacity 0.6s ease; }
 img.loaded { opacity: 1; }

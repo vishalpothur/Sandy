@@ -1,9 +1,5 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { FiChevronDown } from 'react-icons/fi'
-
-gsap.registerPlugin(ScrollTrigger)
 
 function addLoadedClass(e) {
   e.target.classList.add('loaded')
@@ -11,47 +7,39 @@ function addLoadedClass(e) {
 
 export default function Hero() {
   const sectionRef = useRef(null)
-  const bgRef = useRef(null)
+  const imgRef = useRef(null)
   const labelRef = useRef(null)
   const headingRef = useRef(null)
   const descRef = useRef(null)
   const btnsRef = useRef(null)
+  const badgesRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial animations
-      gsap.fromTo(bgRef.current,
-        { scale: 1.1 },
-        { scale: 1, duration: 2.2, ease: 'power2.out' }
+      gsap.fromTo(imgRef.current,
+        { scale: 1.05, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.4, ease: 'power2.out' }
       )
       gsap.fromTo(labelRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.3 }
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.3 }
       )
       gsap.fromTo(headingRef.current,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.5 }
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.5 }
       )
       gsap.fromTo(descRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.8 }
+        { y: 25, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.75 }
       )
       gsap.fromTo(btnsRef.current,
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 1 }
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.95 }
       )
-
-      // Parallax on scroll
-      gsap.to(bgRef.current, {
-        yPercent: 30,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      })
+      gsap.fromTo(badgesRef.current,
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 1.15 }
+      )
     }, sectionRef)
 
     return () => ctx.revert()
@@ -66,66 +54,78 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen flex items-center bg-cream pt-20"
     >
-      {/* Background image */}
-      <div ref={bgRef} className="absolute inset-0 w-full h-full">
-        <img
-          src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=1920&q=90"
-          alt="Wedding portrait"
-          className="w-full h-full object-cover"
-          onLoad={addLoadedClass}
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/70 via-[#080808]/40 to-[#080808]/80" />
-      </div>
+      <div className="max-w-7xl mx-auto px-6 w-full py-12 lg:py-0">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <p
-          ref={labelRef}
-          className="text-xs tracking-ultra text-gold font-light mb-8 uppercase"
-        >
-          Capturing Timeless Moments
-        </p>
+          {/* Left: Text content — 55% */}
+          <div className="w-full lg:w-[55%] flex flex-col items-start order-2 lg:order-1">
+            <p
+              ref={labelRef}
+              className="font-script text-2xl text-blush mb-4"
+            >
+              Welcome to
+            </p>
 
-        <h1
-          ref={headingRef}
-          className="font-serif text-7xl sm:text-8xl lg:text-[110px] font-light leading-[0.9] text-white mb-8"
-        >
-          Life's Most<br />
-          <em className="italic">Beautiful</em><br />
-          Stories
-        </h1>
+            <h1
+              ref={headingRef}
+              className="font-serif font-light text-warm-brown leading-[1.05] mb-6"
+              style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)' }}
+            >
+              Capturing Your<br />
+              Little One's<br />
+              <em className="italic">Magic</em>
+            </h1>
 
-        <p
-          ref={descRef}
-          className="text-white/70 text-lg font-light max-w-xl mx-auto mb-10 leading-relaxed"
-        >
-          Award-winning photography that transforms fleeting moments into timeless art.
-          Based in India, working worldwide.
-        </p>
+            <p
+              ref={descRef}
+              className="text-warm-mid font-light text-lg leading-relaxed max-w-lg mb-8"
+            >
+              Specialising in newborn, baby, kids &amp; maternity photography across India.
+              Every session is crafted with warmth, patience, and love.
+            </p>
 
-        <div ref={btnsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={() => smoothScroll('#gallery')}
-            className="px-10 py-4 bg-gold text-[#080808] text-xs tracking-widest font-semibold hover:bg-gold-light transition-colors duration-300 min-w-[180px]"
-          >
-            EXPLORE WORK
-          </button>
-          <button
-            onClick={() => smoothScroll('#contact')}
-            className="px-10 py-4 border border-white/50 text-white text-xs tracking-widest font-light hover:border-gold hover:text-gold transition-all duration-300 min-w-[180px]"
-          >
-            BOOK A SESSION
-          </button>
+            <div ref={btnsRef} className="flex flex-col sm:flex-row items-start gap-4 mb-8">
+              <button
+                onClick={() => smoothScroll('#gallery')}
+                className="px-8 py-3.5 bg-terra text-white text-sm rounded-full font-medium hover:bg-terra-light transition-colors duration-300"
+              >
+                See Our Work
+              </button>
+              <button
+                onClick={() => smoothScroll('#contact')}
+                className="px-8 py-3.5 border-2 border-terra text-terra text-sm rounded-full font-medium hover:bg-terra hover:text-white transition-all duration-300"
+              >
+                Book a Session
+              </button>
+            </div>
+
+            <div ref={badgesRef} className="flex flex-wrap gap-3">
+              {['Newborn', 'Baby', 'Kids', 'Maternity'].map((badge) => (
+                <span key={badge} className="text-xs tracking-widest text-warm-muted">
+                  ✦ {badge}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Image — 45% */}
+          <div className="w-full lg:w-[45%] order-1 lg:order-2">
+            <div
+              ref={imgRef}
+              className="rounded-3xl overflow-hidden shadow-2xl"
+              style={{ aspectRatio: '4/5' }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=1920&q=90"
+                alt="Newborn baby photography"
+                className="w-full h-full object-cover"
+                onLoad={addLoadedClass}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-        <span className="text-[10px] tracking-widest text-white/40 uppercase">Scroll</span>
-        <FiChevronDown className="text-gold text-xl animate-bounce-y" />
       </div>
     </section>
   )

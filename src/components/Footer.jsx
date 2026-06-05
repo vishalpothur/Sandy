@@ -3,7 +3,7 @@ import { FiInstagram, FiFacebook, FiArrowUp } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 
 const quickLinks = ['Work', 'About', 'Services', 'Contact']
-const serviceLinks = ['Wedding Photography', 'Portrait Sessions', 'Fashion & Editorial', 'Events & Corporate']
+const serviceLinks = ['Newborn Sessions', 'Baby Milestones', 'Kids & Families', 'Maternity']
 
 function smoothScroll(selector) {
   const el = document.querySelector(selector)
@@ -21,38 +21,38 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative bg-[#050505] pt-20 pb-8 px-6 overflow-hidden">
+      <footer className="relative pt-20 pb-8 px-6 overflow-hidden" style={{ background: '#2d2520' }}>
         {/* Watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-          <p className="font-serif text-[18vw] font-light text-white leading-none"
-            style={{ opacity: 0.04, whiteSpace: 'nowrap' }}>
-            SANDY
+          <p className="font-script leading-none"
+            style={{ opacity: 0.06, whiteSpace: 'nowrap', fontSize: '18vw', color: '#e8a598' }}>
+            Sandy
           </p>
         </div>
 
         <div className="relative max-w-7xl mx-auto">
           {/* Top section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 pb-16 border-b border-white/5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 pb-16 border-b border-white/10">
             {/* Brand */}
             <div>
               <div className="mb-6">
-                <p className="font-serif text-3xl font-light tracking-widest text-white">SANDY</p>
-                <p className="text-[9px] tracking-ultra text-gold font-light mt-1">PHOTOGRAPHY</p>
+                <p className="font-script text-4xl text-blush-light">Sandy</p>
+                <p className="text-warm-muted text-sm font-light mt-1">Capturing the magic of little ones</p>
               </div>
-              <p className="text-white/40 text-sm font-light leading-relaxed mb-6">
-                Capturing life's most beautiful stories through the art of photography. Based in India, working worldwide.
+              <p className="text-warm-muted text-sm font-light leading-relaxed mb-6">
+                Newborn, baby, kids &amp; maternity photography across India — crafted with warmth and love.
               </p>
               <div className="flex items-center gap-3">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 flex items-center justify-center border border-white/10 text-white/40 hover:border-gold hover:text-gold transition-all duration-300">
+                  className="w-9 h-9 flex items-center justify-center border border-white/15 rounded-full text-warm-muted hover:border-blush hover:text-blush transition-all duration-300">
                   <FiInstagram size={14} />
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 flex items-center justify-center border border-white/10 text-white/40 hover:border-gold hover:text-gold transition-all duration-300">
+                  className="w-9 h-9 flex items-center justify-center border border-white/15 rounded-full text-warm-muted hover:border-blush hover:text-blush transition-all duration-300">
                   <FiFacebook size={14} />
                 </a>
                 <a href="https://wa.me/918099865977" target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 flex items-center justify-center border border-white/10 text-white/40 hover:border-[#25D366] hover:text-[#25D366] transition-all duration-300">
+                  className="w-9 h-9 flex items-center justify-center border border-white/15 rounded-full text-warm-muted hover:border-[#25D366] hover:text-[#25D366] transition-all duration-300">
                   <FaWhatsapp size={14} />
                 </a>
               </div>
@@ -60,14 +60,14 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <p className="text-[9px] tracking-ultra text-gold uppercase mb-6">Quick Links</p>
+              <p className="text-xs tracking-widest text-blush uppercase mb-6">Quick Links</p>
               <ul className="space-y-3">
                 {quickLinks.map(link => (
                   <li key={link}>
                     <a
                       href={`#${link.toLowerCase()}`}
                       onClick={(e) => { e.preventDefault(); smoothScroll(`#${link.toLowerCase()}`) }}
-                      className="text-white/40 text-sm font-light hover:text-gold transition-colors duration-200"
+                      className="text-warm-muted text-sm font-light hover:text-blush-light transition-colors duration-200"
                     >
                       {link}
                     </a>
@@ -78,14 +78,14 @@ export default function Footer() {
 
             {/* Services */}
             <div>
-              <p className="text-[9px] tracking-ultra text-gold uppercase mb-6">Services</p>
+              <p className="text-xs tracking-widest text-blush uppercase mb-6">Sessions</p>
               <ul className="space-y-3">
                 {serviceLinks.map(s => (
                   <li key={s}>
                     <a
                       href="#services"
                       onClick={(e) => { e.preventDefault(); smoothScroll('#services') }}
-                      className="text-white/40 text-sm font-light hover:text-gold transition-colors duration-200"
+                      className="text-warm-muted text-sm font-light hover:text-blush-light transition-colors duration-200"
                     >
                       {s}
                     </a>
@@ -97,11 +97,11 @@ export default function Footer() {
 
           {/* Bottom bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/20 text-xs tracking-wide">
-              &copy; {new Date().getFullYear()} Sandy Photography. All rights reserved.
+            <p className="text-warm-muted text-xs tracking-wide">
+              &copy; 2025 Sandy Photography &middot; Made with <span className="text-blush">♥</span> in India
             </p>
-            <p className="text-white/20 text-xs tracking-wide">
-              Made with <span className="text-gold">♥</span> in India
+            <p className="text-warm-muted text-xs tracking-wide opacity-60">
+              Capturing tiny moments, forever.
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function Footer() {
       {/* Back to top button */}
       <button
         onClick={() => smoothScroll('#hero')}
-        className={`fixed bottom-8 right-8 z-50 w-12 h-12 flex items-center justify-center bg-gold text-[#080808] hover:bg-gold-light transition-all duration-300 ${
+        className={`fixed bottom-8 right-8 z-50 w-12 h-12 flex items-center justify-center bg-terra text-white rounded-full shadow-lg hover:bg-terra-light transition-all duration-300 ${
           showTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         aria-label="Back to top"

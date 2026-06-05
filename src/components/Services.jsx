@@ -1,101 +1,75 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { FaRing, FaUser, FaCamera, FaCalendarAlt } from 'react-icons/fa'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const services = [
   {
-    icon: FaRing,
-    title: 'Wedding Photography',
-    description: 'Your love story deserves to be told with elegance. From intimate ceremonies to grand celebrations, every moment is preserved with timeless artistry.',
-    price: '₹45,000',
-    features: ['Full day coverage', 'Candid & portraits', 'Edited digital gallery'],
+    emoji: '👶',
+    title: 'Newborn Sessions',
+    description: 'For babies 0–14 days. Safe, gentle, and utterly precious sessions in our cosy studio.',
+    price: '₹12,000',
+    features: ['0–14 days old', 'Safe & gentle posing', 'Studio setting', 'Edited digital gallery'],
   },
   {
-    icon: FaUser,
-    title: 'Portrait Sessions',
-    description: 'Revealing the authentic you. Whether personal branding or artistic portraiture, we create images that speak volumes about who you are.',
+    emoji: '⭐',
+    title: 'Baby Milestones',
+    description: 'Sitter sessions, cake smash, first birthday — every milestone deserves its own story.',
     price: '₹8,000',
-    features: ['2-hour session', '30 edited images', 'Studio or outdoor'],
+    features: ['3m, 6m, 1yr packages', 'Cake smash included', 'Fun props & setups', 'Print-ready files'],
   },
   {
-    icon: FaCamera,
-    title: 'Fashion & Editorial',
-    description: 'High-impact imagery for fashion brands, designers, and editorial features. Precision-crafted for maximum visual storytelling.',
-    price: '₹15,000',
-    features: ['Creative direction', 'Multiple looks', 'Print-ready files'],
+    emoji: '🌈',
+    title: 'Kids & Families',
+    description: 'Candid, playful, real. Outdoor or studio sessions that capture your family\'s unique vibe.',
+    price: '₹10,000',
+    features: ['Studio or outdoor', 'Candid & posed', 'All ages welcome', 'Same-week delivery'],
   },
   {
-    icon: FaCalendarAlt,
-    title: 'Events & Corporate',
-    description: 'From product launches to galas, every milestone captured with professionalism and creative flair that elevates your brand.',
-    price: '₹20,000',
-    features: ['Half / full day', 'Quick turnaround', 'Commercial license'],
+    emoji: '🌸',
+    title: 'Maternity',
+    description: 'Celebrate the most magical chapter. Beautiful bump portraits, indoors or in nature.',
+    price: '₹9,000',
+    features: ['28–36 weeks ideal', 'Indoor or outdoor', 'Partner & kids welcome', 'Guided posing'],
   },
 ]
 
-function ServiceCard({ service, index }) {
-  const cardRef = useRef(null)
-  const borderRef = useRef(null)
-
+function ServiceCard({ service }) {
   return (
-    <div
-      ref={cardRef}
-      className="relative group bg-[#111111] p-8 flex flex-col overflow-hidden transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(201,169,110,0.12)]"
-    >
-      {/* Gold top border — animates width on hover */}
-      <div
-        ref={borderRef}
-        className="absolute top-0 left-0 h-[2px] bg-gold transition-all duration-500"
-        style={{ width: '0%' }}
-        onMouseEnter={() => { if (borderRef.current) borderRef.current.style.width = '100%' }}
-      />
-      <div
-        className="absolute top-0 left-0 w-full h-[2px]"
-        onMouseEnter={() => { if (borderRef.current) borderRef.current.style.width = '100%' }}
-        onMouseLeave={() => { if (borderRef.current) borderRef.current.style.width = '0%' }}
-      />
-      {/* Force full border on parent hover */}
-      <style>{`
-        .service-card:hover .service-border { width: 100% !important; }
-      `}</style>
-      <div className="service-card group absolute inset-0 pointer-events-none">
-        <div className="service-border absolute top-0 left-0 h-[2px] bg-gold transition-all duration-500 w-0" />
-      </div>
+    <div className="relative group bg-white rounded-2xl p-8 flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(232,165,152,0.2)] border border-cream-3 hover:border-terra">
+      {/* Blush top accent */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-blush rounded-t-2xl" />
 
-      {/* Icon */}
-      <div className="w-12 h-12 flex items-center justify-center border border-gold/30 mb-6 group-hover:border-gold transition-colors duration-300">
-        <service.icon className="text-gold text-lg" />
-      </div>
+      {/* Emoji icon */}
+      <div className="text-4xl mb-6">{service.emoji}</div>
 
       {/* Content */}
-      <h3 className="font-serif text-2xl font-light text-white mb-3">{service.title}</h3>
-      <p className="text-white/50 text-sm font-light leading-relaxed mb-6 flex-1">{service.description}</p>
+      <h3 className="font-serif text-2xl font-light text-warm-brown mb-3">{service.title}</h3>
+      <p className="text-warm-mid text-sm font-light leading-relaxed mb-6 flex-1">{service.description}</p>
 
       {/* Features */}
       <ul className="space-y-2 mb-8">
         {service.features.map((feat) => (
-          <li key={feat} className="flex items-center gap-2 text-xs text-white/40 tracking-wide">
-            <span className="w-1 h-1 rounded-full bg-gold inline-block flex-shrink-0" />
+          <li key={feat} className="flex items-center gap-2 text-xs text-warm-muted tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-blush inline-block flex-shrink-0" />
             {feat}
           </li>
         ))}
       </ul>
 
       {/* Price + CTA */}
-      <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
+      <div className="flex items-center justify-between mt-auto pt-6 border-t border-cream-3">
         <div>
-          <p className="text-[10px] tracking-widest text-white/30 uppercase">Starting at</p>
-          <p className="font-serif text-2xl text-gold">{service.price}</p>
+          <p className="text-[10px] tracking-widest text-warm-muted uppercase">Starting at</p>
+          <p className="font-serif text-2xl font-semibold text-terra">{service.price}</p>
         </div>
         <a
           href="#contact"
           onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-          className="px-5 py-2 border border-gold text-gold text-xs tracking-widest hover:bg-gold hover:text-[#080808] transition-all duration-300"
+          className="px-5 py-2 border-2 border-terra text-terra text-sm rounded-full hover:bg-terra hover:text-white transition-all duration-300"
         >
-          BOOK NOW
+          Book Now
         </a>
       </div>
     </div>
@@ -126,23 +100,23 @@ export default function Services() {
   }, [])
 
   return (
-    <section id="services" ref={sectionRef} className="py-24 px-6 bg-[#060606]">
+    <section id="services" ref={sectionRef} className="py-24 px-6 bg-cream-2">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-[10px] tracking-ultra text-gold font-light uppercase mb-4">Services</p>
-          <h2 className="font-serif text-5xl md:text-6xl font-light text-white mb-4">
-            Crafted Experiences<br />
-            <em className="italic">For Every Moment</em>
+          <p className="font-script text-3xl text-terra mb-2">What We Offer</p>
+          <h2 className="font-serif text-5xl md:text-6xl font-light text-warm-brown mb-4">
+            Sessions Made<br />
+            <em className="italic">With Love</em>
           </h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
+          <div className="w-16 h-0.5 bg-blush mx-auto" />
         </div>
 
         {/* Cards */}
         <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <div key={service.title} className="service-item">
-              <ServiceCard service={service} index={index} />
+              <ServiceCard service={service} />
             </div>
           ))}
         </div>
