@@ -1,208 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sandy Photography</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="nav-logo">Sandy Photography</div>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><button class="btn-connect" onclick="openModal()">Connect</button></li>
-    </ul>
-    <button class="hamburger" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-sub">Capturing your most precious moments</p>
-      <h1 class="hero-title">Sandy Photography</h1>
-      <p class="hero-tagline">Newborns &middot; Kids &middot; Families &middot; Maternity</p>
-      <button class="btn-hero" onclick="openModal()">Book a Session</button>
-    </div>
-    <div class="hero-scroll" onclick="scrollTo('#about')">&#8595;</div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about section" id="about">
-    <div class="container two-col">
-      <div class="about-img">
-        <div class="img-frame">
-          <img src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=600&q=80" alt="Sandy photographer" />
-        </div>
-      </div>
-      <div class="about-text">
-        <span class="section-label">About Sandy</span>
-        <h2>Every child tells a story.<br/>Let me capture yours.</h2>
-        <p>Hi, I'm Sandy — a passionate lifestyle photographer based in India, specialising in newborn, baby, kids, family, and maternity photography. My sessions are warm, relaxed, and designed around <em>your</em> family.</p>
-        <p>Whether it's a tiny yawn at 10 days old or a baby bump glowing in golden hour light, I believe every moment deserves to be held forever.</p>
-        <button class="btn-outline" onclick="openModal()">Let's Connect</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="gallery section" id="gallery">
-    <div class="container">
-      <span class="section-label center">Portfolio</span>
-      <h2 class="section-title center">A glimpse into our sessions</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item tall">
-          <img src="https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=500&q=80" alt="Newborn photography" />
-          <span class="gallery-tag">Newborn</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&q=80" alt="Baby photography" />
-          <span class="gallery-tag">Baby</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&q=80" alt="Family photography" />
-          <span class="gallery-tag">Family</span>
-        </div>
-        <div class="gallery-item tall">
-          <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=500&q=80" alt="Maternity photography" />
-          <span class="gallery-tag">Maternity</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&q=80" alt="Kids photography" />
-          <span class="gallery-tag">Kids</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&q=80" alt="Children photography" />
-          <span class="gallery-tag">Children</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services section" id="services">
-    <div class="container">
-      <span class="section-label center">What I Offer</span>
-      <h2 class="section-title center">Session Types</h2>
-      <div class="services-grid">
-        <div class="service-card" onclick="openModal('Baby')">
-          <div class="service-icon">&#128118;</div>
-          <h3>Baby</h3>
-          <p>Milestone sessions for babies 3–12 months — smiles, sitting, and all those tiny details.</p>
-          <span class="service-cta">Book Now &rarr;</span>
-        </div>
-        <div class="service-card" onclick="openModal('Kids/Family')">
-          <div class="service-icon">&#128106;</div>
-          <h3>Kids / Family</h3>
-          <p>Authentic, candid family portraits that reflect real love, real laughter, real you.</p>
-          <span class="service-cta">Book Now &rarr;</span>
-        </div>
-        <div class="service-card" onclick="openModal('Maternity')">
-          <div class="service-icon">&#10084;</div>
-          <h3>Maternity</h3>
-          <p>Celebrate this beautiful chapter — elegant indoor or sun-drenched outdoor sessions.</p>
-          <span class="service-cta">Book Now &rarr;</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p class="footer-logo">Sandy Photography</p>
-    <p class="footer-sub">Capturing love, one frame at a time.</p>
-    <button class="btn-connect footer-btn" onclick="openModal()">Connect with Sandy</button>
-    <p class="footer-copy">&copy; 2025 Sandy Photography. All rights reserved.</p>
-  </footer>
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
-
-      <div class="modal-header">
-        <span class="modal-icon">&#128247;</span>
-        <h2 id="modalTitle">Book a Session</h2>
-        <p>Fill in a few details and Sandy will reach out on WhatsApp!</p>
-      </div>
-
-      <form id="bookingForm" onsubmit="sendToWhatsApp(event)" novalidate>
-
-        <!-- Shoot type -->
-        <div class="form-group">
-          <label class="form-label">Type of Shoot <span class="required">*</span></label>
-          <div class="pill-group" id="shootType">
-            <button type="button" class="pill" data-value="Baby" onclick="selectPill('shootType', this)">&#128118; Baby</button>
-            <button type="button" class="pill" data-value="Kids/Family" onclick="selectPill('shootType', this)">&#128106; Kids / Family</button>
-            <button type="button" class="pill" data-value="Maternity" onclick="selectPill('shootType', this)">&#10084; Maternity</button>
-          </div>
-          <p class="field-error" id="shootTypeError">Please select a shoot type.</p>
-        </div>
-
-        <!-- Location -->
-        <div class="form-group">
-          <label class="form-label">Location Preference <span class="required">*</span></label>
-          <div class="pill-group" id="location">
-            <button type="button" class="pill" data-value="Indoor" onclick="selectPill('location', this)">&#127968; Indoor</button>
-            <button type="button" class="pill" data-value="Outdoor" onclick="selectPill('location', this)">&#127796; Outdoor</button>
-            <button type="button" class="pill" data-value="Custom" onclick="selectPill('location', this)">&#10024; Custom</button>
-          </div>
-          <p class="field-error" id="locationError">Please select a location.</p>
-        </div>
-
-        <!-- Custom location input -->
-        <div class="form-group" id="customLocationGroup" style="display:none;">
-          <label class="form-label" for="customLocation">Describe your preferred location</label>
-          <input type="text" id="customLocation" class="form-input" placeholder="e.g. my home garden, a beach…" maxlength="100" />
-        </div>
-
-        <!-- Name -->
-        <div class="form-group">
-          <label class="form-label" for="clientName">Your Name <span class="required">*</span></label>
-          <input type="text" id="clientName" class="form-input" placeholder="Full name" maxlength="60" required />
-          <p class="field-error" id="clientNameError">Please enter your name.</p>
-        </div>
-
-        <!-- Phone -->
-        <div class="form-group">
-          <label class="form-label" for="clientPhone">Phone Number <span class="required">*</span></label>
-          <div class="phone-row">
-            <span class="phone-prefix">+91</span>
-            <input type="tel" id="clientPhone" class="form-input" placeholder="9876543210" maxlength="10" pattern="[0-9]{10}" required />
-          </div>
-          <p class="field-error" id="clientPhoneError">Please enter a valid 10-digit number.</p>
-        </div>
-
-        <!-- Message (optional) -->
-        <div class="form-group">
-          <label class="form-label" for="clientMessage">Anything else? <span class="optional">(optional)</span></label>
-          <textarea id="clientMessage" class="form-input form-textarea" placeholder="Tell Sandy a little more about your vision…" maxlength="300" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">
-          <span>Send via WhatsApp</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.548 4.076 1.504 5.789L0 24l6.388-1.476A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.372l-.36-.213-3.713.858.882-3.613-.235-.371A9.818 9.818 0 0 1 12 2.182c5.425 0 9.818 4.393 9.818 9.818 0 5.426-4.393 9.818-9.818 9.818z"/></svg>
-        </button>
-      </form>
-
-      <div class="modal-success" id="modalSuccess" style="display:none;">
-        <div class="success-icon">&#10003;</div>
-        <h3>Message Sent!</h3>
-        <p>WhatsApp is opening with your details. Sandy will get back to you soon.</p>
-        <button class="btn-outline" onclick="closeModal()">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sandy Photography | Premium Portrait &amp; Wedding Photography</title>
+    <meta name="description" content="Sandy Photography — Award-winning premium portrait, wedding, fashion, and events photographer based in India. Capturing timeless moments with artistic vision." />
+    <meta name="keywords" content="Sandy Photography, wedding photographer India, portrait photography, fashion photography, premium photographer" />
+    <meta property="og:title" content="Sandy Photography | Premium Portrait &amp; Wedding Photography" />
+    <meta property="og:description" content="Award-winning premium photographer capturing life's most beautiful stories across India." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=1200&q=80" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sandy Photography | Premium Portrait &amp; Wedding Photography" />
+    <meta name="twitter:description" content="Award-winning premium photographer capturing life's most beautiful stories across India." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
+    <style>
+      html, body { background: #080808; margin: 0; padding: 0; }
+      #root { min-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
