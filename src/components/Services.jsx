@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import FloatingElements from './FloatingElements'
+import { openWhatsApp, serviceMessage } from '../utils/whatsapp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -72,16 +73,15 @@ function ServiceCard({ service }) {
           <p className="text-[10px] tracking-widest text-warm-muted uppercase">Starting at</p>
           <p className="font-serif text-2xl font-semibold" style={{ color: service.color }}>{service.price}</p>
         </div>
-        <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+        <button
+          onClick={() => openWhatsApp(serviceMessage(service.title))}
           className="px-5 py-2 border-2 text-sm rounded-full font-medium transition-all duration-300 hover:text-white"
           style={{ borderColor: service.color, color: service.color }}
           onMouseEnter={(e) => { e.currentTarget.style.background = service.color }}
           onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
         >
           Book Now
-        </a>
+        </button>
       </div>
     </div>
   )

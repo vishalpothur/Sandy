@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { openWhatsApp, serviceMessage } from '../utils/whatsapp'
 
 const navLinks = [
   { label: 'Work', href: '#gallery' },
@@ -76,13 +77,12 @@ export default function Navbar() {
 
           {/* Book Now button */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#contact"
-              onClick={(e) => handleNav(e, '#contact')}
+            <button
+              onClick={() => openWhatsApp(serviceMessage('Photography'))}
               className="px-6 py-2 bg-terra text-white text-sm rounded-full hover:bg-terra-light transition-all duration-300 font-medium"
             >
               Book Now
-            </a>
+            </button>
           </div>
 
           {/* Hamburger */}
@@ -117,13 +117,12 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a
-              href="#contact"
-              onClick={(e) => handleNav(e, '#contact')}
+            <button
+              onClick={() => { setMenuOpen(false); openWhatsApp(serviceMessage('Photography')) }}
               className="px-8 py-3 bg-terra text-white text-sm rounded-full hover:bg-terra-light transition-all duration-300 mt-4 inline-block"
             >
               Book Now
-            </a>
+            </button>
           </li>
         </ul>
       </div>

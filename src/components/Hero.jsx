@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import FloatingElements from './FloatingElements'
+import { openWhatsApp, serviceMessage } from '../utils/whatsapp'
 
 function addLoadedClass(e) {
   e.target.classList.add('loaded')
@@ -96,7 +97,7 @@ export default function Hero() {
                 See Our Work
               </button>
               <button
-                onClick={() => smoothScroll('#contact')}
+                onClick={() => openWhatsApp(serviceMessage('Photography'))}
                 className="px-8 py-3.5 border-2 border-terra text-terra text-sm rounded-full font-medium hover:bg-terra hover:text-white transition-all duration-300"
               >
                 Book a Session

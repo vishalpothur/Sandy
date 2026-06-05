@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
+import { openWhatsApp, bookingMessage } from '../utils/whatsapp'
 
 const SHOOT_TYPES = [
   'Kids Photography',
@@ -42,30 +43,24 @@ export default function Contact() {
     setLoading(true)
     setError('')
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, phone: form.phone.trim() }),
-      })
-      const data = await res.json()
-      if (data.success) {
-        setSuccess(true)
-        setForm(initialForm)
-      } else {
-        if (data.errors) {
-          const fe = {}
-          data.errors.forEach(e => { fe[e.field] = e.message })
-          setFieldErrors(fe)
-        } else {
-          setError(data.message || 'Something went wrong. Please try again.')
-        }
-      }
-    } catch {
-      setError('Network error. Please check your connection and try again.')
-    } finally {
-      setLoading(false)
-    }
+    // Open WhatsApp immediately with all the form details
+    openWhatsApp(bookingMessage({
+      name: form.name,
+      phone: form.phone.trim(),
+      shootType: form.shootType,
+      message: form.message,
+    }))
+
+    // Also save to server in background (non-blocking)
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...form, phone: form.phone.trim() }),
+    }).catch(() => { /* silent — WhatsApp already opened */ })
+
+    setSuccess(true)
+    setForm(initialForm)
+    setLoading(false)
   }
 
   const inputCls = (field) => `w-full bg-white border rounded-lg ${
