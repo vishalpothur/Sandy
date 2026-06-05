@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import FloatingElements from './FloatingElements'
 
 function addLoadedClass(e) {
   e.target.classList.add('loaded')
@@ -54,8 +55,9 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative w-full min-h-screen flex items-center bg-cream pt-20"
+      className="relative w-full min-h-screen flex items-center bg-cream pt-20 overflow-hidden"
     >
+      <FloatingElements />
       <div className="max-w-7xl mx-auto px-6 w-full py-12 lg:py-0">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
@@ -102,7 +104,7 @@ export default function Hero() {
             </div>
 
             <div ref={badgesRef} className="flex flex-wrap gap-3">
-              {['Newborn', 'Baby', 'Kids', 'Maternity'].map((badge) => (
+              {['Kids', 'Maternity', 'Weddings', 'Events'].map((badge) => (
                 <span key={badge} className="text-xs tracking-widest text-warm-muted">
                   ✦ {badge}
                 </span>

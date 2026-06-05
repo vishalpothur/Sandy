@@ -89,7 +89,7 @@ const contactValidation = [
     .matches(/^[0-9]{10}$/)
     .withMessage('Phone must be a 10-digit number'),
   body('shootType')
-    .isIn(['Newborn', 'Baby Milestone', 'Cake Smash', 'Kids', 'Family', 'Maternity', 'Other'])
+    .isIn(['Kids Photography', 'Maternity Photography', 'Wedding Photography', 'Event Photography', 'Other'])
     .withMessage('Please select a valid shoot type'),
   body('message')
     .trim()

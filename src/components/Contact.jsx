@@ -3,12 +3,10 @@ import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook } from 'react-icons/
 import { FaWhatsapp } from 'react-icons/fa'
 
 const SHOOT_TYPES = [
-  'Newborn (0-14 days)',
-  'Baby Milestone',
-  'Cake Smash',
-  'Kids Session',
-  'Family Session',
-  'Maternity',
+  'Kids Photography',
+  'Maternity Photography',
+  'Wedding Photography',
+  'Event Photography',
   'Other',
 ]
 

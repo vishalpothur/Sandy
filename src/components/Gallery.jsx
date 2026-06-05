@@ -2,33 +2,33 @@ import { useState, useEffect, useRef } from 'react'
 import Lightbox from './Lightbox'
 
 const allImages = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'Tiny Perfection', category: 'Newborn', aspect: '3/4' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1565087158964-d1b0ab8e77d2?w=800&q=80', title: 'Newborn Hands', category: 'Newborn', aspect: '3/4' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Sweet Slumber', category: 'Newborn', aspect: '3/4' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Pure Joy', category: 'Baby', aspect: '3/4' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80', title: 'First Smile', category: 'Baby', aspect: '1/1' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1519456264917-42d2b47d2b72?w=800&q=80', title: 'Curious Eyes', category: 'Baby', aspect: '3/4' },
-  { id: 7, src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80', title: 'Little Explorer', category: 'Baby', aspect: '4/3' },
-  { id: 8, src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Golden Afternoon', category: 'Kids', aspect: '4/3' },
-  { id: 9, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Playful Spirit', category: 'Kids', aspect: '3/4' },
-  { id: 10, src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', title: 'Adventure Time', category: 'Kids', aspect: '1/1' },
-  { id: 11, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Giggles & Smiles', category: 'Kids', aspect: '4/3' },
-  { id: 12, src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Glowing Mama', category: 'Maternity', aspect: '3/4' },
-  { id: 13, src: 'https://images.unsplash.com/photo-1583703787657-e84ee23acf05?w=800&q=80', title: 'Beautiful Bump', category: 'Maternity', aspect: '3/4' },
-  { id: 14, src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80', title: 'Expecting Love', category: 'Maternity', aspect: '3/4' },
-  { id: 15, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Family Bonds', category: 'Families', aspect: '4/3' },
-  { id: 16, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80', title: 'Together Always', category: 'Families', aspect: '4/3' },
-  { id: 17, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Family Joy', category: 'Families', aspect: '4/3' },
-  { id: 18, src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Sunday Morning', category: 'Families', aspect: '3/4' },
-  { id: 19, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'New Arrival', category: 'Newborn', aspect: '4/3' },
-  { id: 20, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Dreamland', category: 'Newborn', aspect: '1/1' },
-  { id: 21, src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Sitter Session', category: 'Baby', aspect: '3/4' },
-  { id: 22, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Sunshine Kid', category: 'Kids', aspect: '4/3' },
-  { id: 23, src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Nine Months', category: 'Maternity', aspect: '4/3' },
-  { id: 24, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Our Tribe', category: 'Families', aspect: '3/4' },
+  { id: 1,  src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Golden Afternoon',   category: 'Kids',      aspect: '4/3' },
+  { id: 2,  src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Playful Spirit',     category: 'Kids',      aspect: '3/4' },
+  { id: 3,  src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', title: 'Little Explorer',    category: 'Kids',      aspect: '1/1' },
+  { id: 4,  src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Giggles & Smiles',   category: 'Kids',      aspect: '4/3' },
+  { id: 5,  src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80', title: 'Adventure Time',    category: 'Kids',      aspect: '3/4' },
+  { id: 6,  src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Sunshine Days',     category: 'Kids',      aspect: '4/3' },
+  { id: 7,  src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Glowing Mama',      category: 'Maternity', aspect: '3/4' },
+  { id: 8,  src: 'https://images.unsplash.com/photo-1583703787657-e84ee23acf05?w=800&q=80', title: 'Beautiful Bump',    category: 'Maternity', aspect: '3/4' },
+  { id: 9,  src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80', title: 'Expecting Love',    category: 'Maternity', aspect: '4/3' },
+  { id: 10, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Nine Months',       category: 'Maternity', aspect: '3/4' },
+  { id: 11, src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', title: 'Our Wedding Day',   category: 'Weddings',  aspect: '3/4' },
+  { id: 12, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Together Always',   category: 'Weddings',  aspect: '4/3' },
+  { id: 13, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80', title: 'First Dance',       category: 'Weddings',  aspect: '4/3' },
+  { id: 14, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Bridal Glow',       category: 'Weddings',  aspect: '3/4' },
+  { id: 15, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'Forever Begins',    category: 'Weddings',  aspect: '1/1' },
+  { id: 16, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80', title: 'Celebration Time',  category: 'Events',    aspect: '4/3' },
+  { id: 17, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Happy Moments',     category: 'Events',    aspect: '3/4' },
+  { id: 18, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80', title: 'First Birthday',    category: 'Events',    aspect: '1/1' },
+  { id: 19, src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Party Magic',       category: 'Events',    aspect: '4/3' },
+  { id: 20, src: 'https://images.unsplash.com/photo-1519456264917-42d2b47d2b72?w=800&q=80', title: 'Curious Eyes',      category: 'Kids',      aspect: '3/4' },
+  { id: 21, src: 'https://images.unsplash.com/photo-1565087158964-d1b0ab8e77d2?w=800&q=80', title: 'Little Hands',      category: 'Maternity', aspect: '4/3' },
+  { id: 22, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Sunshine Kid',      category: 'Kids',      aspect: '4/3' },
+  { id: 23, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Wedding Portraits', category: 'Weddings',  aspect: '3/4' },
+  { id: 24, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Sweet Slumber',     category: 'Maternity', aspect: '3/4' },
 ]
 
-const FILTERS = ['All', 'Newborn', 'Baby', 'Kids', 'Maternity', 'Families']
+const FILTERS = ['All', 'Kids', 'Maternity', 'Weddings', 'Events']
 
 function GalleryItem({ image, index, onClick }) {
   const ref = useRef(null)
