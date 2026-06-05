@@ -4,10 +4,57 @@ const SANDY_WHATSAPP = '918099865977';
 // ── State ──────────────────────────────────────────────────────
 const state = { shootType: null, location: null };
 
-// ── Navbar scroll effect ────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 40);
+// ── Parallax & scroll animations ───────────────────────────────
+function onScroll() {
+  const sy = window.scrollY;
+
+  // Navbar
+  document.querySelector('.navbar').classList.toggle('scrolled', sy > 40);
+
+  // Hero background parallax
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.style.backgroundPositionY = `calc(50% + ${sy * 0.4}px)`;
+  }
+
+  // Gallery image parallax — each img shifts at its own speed
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    const rect = item.getBoundingClientRect();
+    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+    item.querySelector('img').style.transform = `scale(1.12) translateY(${center * 0.06}px)`;
+  });
+
+  // About image subtle parallax
+  const aboutImg = document.querySelector('.about .img-frame img');
+  if (aboutImg) {
+    const rect = aboutImg.closest('.img-frame').getBoundingClientRect();
+    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+    aboutImg.style.transform = `translateY(${center * 0.07}px) scale(1.08)`;
+  }
+}
+
+// Intersection Observer — fade + slide up on scroll-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll(
+    '.gallery-item, .service-card, .about-text, .about-img, .section-label, .section-title'
+  ).forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
 });
+
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
 
 function toggleNav() {
   document.querySelector('.nav-links').classList.toggle('open');
