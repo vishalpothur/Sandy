@@ -160,6 +160,10 @@ app.post('/api/contact', contactValidation, async (req, res) => {
 // Serve static files in production
 if (isProd) {
   const distDir = join(__dirname, 'dist')
+  if (!existsSync(distDir)) {
+    console.error('ERROR: dist/ folder not found. Run "npm run build" before starting in production.')
+    process.exit(1)
+  }
   app.use(express.static(distDir, { maxAge: '1y', etag: true }))
   app.get('*', (req, res) => {
     res.sendFile(join(distDir, 'index.html'))
