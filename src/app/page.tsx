@@ -1,6 +1,7 @@
 'use client'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
+import ScrollShowcase from '@/components/ScrollShowcase'
 import Gallery from '@/components/Gallery'
 import Services from '@/components/Services'
 import About from '@/components/About'
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <ScrollShowcase />
         <Gallery />
         <Services />
         <About />
