@@ -1,0 +1,12 @@
+[
+  {
+    "id": "fe8db1c3-9c3a-47d1-a26d-d4fb3d38af15",
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "9876543210",
+    "shootType": "Wedding",
+    "message": "This is a test inquiry message",
+    "submittedAt": "2026-06-05T12:00:27.998Z",
+    "ip": "127.0.0.1"
+  }
+]
