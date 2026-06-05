@@ -75,8 +75,8 @@ export default function Hero() {
           <div className="w-full lg:w-[45%] order-1 lg:order-2">
             <div ref={imgRef} className="rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: '4/5' }}>
               <img
-                src="https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=1920&q=90"
-                alt="Mother with baby photography"
+                src="/photos/kids-books.jpg"
+                alt="Kids photography by Sandy"
                 className="w-full h-full object-cover"
                 onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
               />
