@@ -6,46 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const FRAMES = [
-  {
-    id: 'lid',
-    src: '/photos/kids-outdoor.jpg',
-    alt: 'Little Biker',
-    label: 'Kids',
-    w: 3,
-    h: 4,
-  },
-  {
-    id: 'left1',
-    src: '/photos/kids-cake-smash.jpg',
-    alt: 'I Am One!',
-    label: 'Events',
-    w: 4,
-    h: 5,
-  },
-  {
-    id: 'right1',
-    src: '/photos/kids-books.jpg',
-    alt: 'Future Scholar',
-    label: 'Kids',
-    w: 3,
-    h: 4,
-  },
-  {
-    id: 'btm',
-    src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=85',
-    alt: 'Celebration',
-    label: 'Events',
-    w: 16,
-    h: 10,
-  },
-  {
-    id: 'top',
-    src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=900&q=85',
-    alt: 'Maternity',
-    label: 'Maternity',
-    w: 3,
-    h: 4,
-  },
+  { id: 'lid',    src: '/photos/kids-books.jpg',      alt: 'Future Scholar', label: 'Kids',     w: 3, h: 4 },
+  { id: 'left1',  src: '/photos/kids-cake-smash.jpg', alt: 'I Am One!',      label: 'Events',   w: 4, h: 5 },
+  { id: 'right1', src: '/photos/kids-outdoor.jpg',    alt: 'Little Explorer',label: 'Kids',     w: 3, h: 4 },
+  { id: 'btm',    src: '/photos/kids-cake-smash.jpg', alt: 'Birthday Magic', label: 'Events',   w: 16, h: 10 },
+  { id: 'top',    src: '/photos/kids-outdoor.jpg',    alt: 'Sandy Kids',     label: 'Kids',     w: 3, h: 4 },
 ]
 
 export default function ScrollShowcase() {

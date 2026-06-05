@@ -32,8 +32,8 @@ export default function About() {
         <div className="about-left">
           <div className="relative rounded-3xl overflow-hidden shadow-xl" style={{ aspectRatio: '4/5' }}>
             <img
-              src="https://images.unsplash.com/photo-1554080353-a576cf803bda?w=900&q=85"
-              alt="Sandy — photographer"
+              src="/photos/kids-outdoor.jpg"
+              alt="Sandy Photography — kids session"
               className="w-full h-full object-cover"
               onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
             />

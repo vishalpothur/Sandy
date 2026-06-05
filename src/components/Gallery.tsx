@@ -2,30 +2,28 @@
 import { useState, useEffect, useRef } from 'react'
 import Lightbox from './Lightbox'
 
-// Sandy's real photos (from Google Drive) + Unsplash for wedding/maternity placeholders
 const allImages = [
-  // Sandy's real kids photos
-  { id: 1,  src: '/photos/kids-outdoor.jpg',                                                  title: 'Little Biker',       category: 'Kids',      aspect: '3/4' },
-  { id: 2,  src: '/photos/kids-books.jpg',                                                    title: 'Future Scholar',     category: 'Kids',      aspect: '3/4' },
-  { id: 3,  src: '/photos/kids-cake-smash.jpg',                                               title: 'I Am One!',          category: 'Events',    aspect: '4/3' },
-  { id: 4,  src: 'https://drive.google.com/uc?export=view&id=1pxeSHkq8lxfLgZoCZ4smtLSjF9rOuFRX', title: 'Cake Smash Joy',  category: 'Events',    aspect: '4/3' },
-  // Kids - Unsplash fill
-  { id: 5,  src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80',  title: 'Adventure Time',     category: 'Kids',      aspect: '3/4' },
-  { id: 6,  src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80',     title: 'Sunshine Days',      category: 'Kids',      aspect: '4/3' },
-  { id: 7,  src: 'https://images.unsplash.com/photo-1519456264917-42d2b47d2b72?w=800&q=80',  title: 'Curious Eyes',       category: 'Kids',      aspect: '3/4' },
-  // Maternity
-  { id: 8,  src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80',  title: 'Glowing Mama',       category: 'Maternity', aspect: '3/4' },
-  { id: 9,  src: 'https://images.unsplash.com/photo-1583703787657-e84ee23acf05?w=800&q=80',  title: 'Beautiful Bump',     category: 'Maternity', aspect: '3/4' },
-  { id: 10, src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80',     title: 'Expecting Love',     category: 'Maternity', aspect: '4/3' },
-  { id: 11, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80',  title: 'Nine Months',        category: 'Maternity', aspect: '3/4' },
-  // Weddings
-  { id: 12, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80',  title: 'Together Always',    category: 'Weddings',  aspect: '4/3' },
-  { id: 13, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80',  title: 'First Dance',        category: 'Weddings',  aspect: '4/3' },
-  { id: 14, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',  title: 'Bridal Glow',        category: 'Weddings',  aspect: '3/4' },
-  { id: 15, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80',  title: 'Forever Begins',     category: 'Weddings',  aspect: '1/1' },
-  // Events
-  { id: 16, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',  title: 'Celebration Time',   category: 'Events',    aspect: '4/3' },
-  { id: 17, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80',  title: 'First Birthday',     category: 'Events',    aspect: '1/1' },
+  // ── Sandy's real photos ──
+  { id: 1,  src: '/photos/kids-outdoor.jpg',    title: 'Little Explorer',   category: 'Kids',      aspect: '3/4' },
+  { id: 2,  src: '/photos/kids-books.jpg',      title: 'Future Scholar',    category: 'Kids',      aspect: '3/4' },
+  { id: 3,  src: '/photos/kids-cake-smash.jpg', title: 'I Am One!',         category: 'Events',    aspect: '4/3' },
+  { id: 4,  src: '/photos/kids-outdoor.jpg',    title: 'Happy Days',        category: 'Kids',      aspect: '4/3' },
+  { id: 5,  src: '/photos/kids-books.jpg',      title: 'Tiny Genius',       category: 'Kids',      aspect: '3/4' },
+  { id: 6,  src: '/photos/kids-cake-smash.jpg', title: 'Cake Smash Fun',    category: 'Events',    aspect: '3/4' },
+  // ── Maternity — Unsplash until Sandy's maternity photos are added ──
+  { id: 7,  src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Glowing Mama',     category: 'Maternity', aspect: '3/4' },
+  { id: 8,  src: 'https://images.unsplash.com/photo-1583703787657-e84ee23acf05?w=800&q=80', title: 'Beautiful Bump',   category: 'Maternity', aspect: '3/4' },
+  { id: 9,  src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80',    title: 'Expecting Love',   category: 'Maternity', aspect: '4/3' },
+  { id: 10, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Nine Months',      category: 'Maternity', aspect: '3/4' },
+  // ── Weddings — Unsplash until Sandy's wedding photos are added ──
+  { id: 11, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Together Always',  category: 'Weddings',  aspect: '4/3' },
+  { id: 12, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80', title: 'First Dance',      category: 'Weddings',  aspect: '4/3' },
+  { id: 13, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Bridal Glow',      category: 'Weddings',  aspect: '3/4' },
+  { id: 14, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'Forever Begins',   category: 'Weddings',  aspect: '1/1' },
+  // ── Events ──
+  { id: 15, src: '/photos/kids-cake-smash.jpg', title: 'Birthday Magic',    category: 'Events',    aspect: '4/3' },
+  { id: 16, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80', title: 'Celebration Time', category: 'Events',    aspect: '4/3' },
+  { id: 17, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80', title: 'First Birthday',   category: 'Events',    aspect: '1/1' },
 ]
 
 const FILTERS = ['All', 'Kids', 'Maternity', 'Weddings', 'Events']
