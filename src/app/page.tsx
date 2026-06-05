@@ -1,41 +1,26 @@
 'use client'
-import dynamic from 'next/dynamic'
-import SmoothScrollProvider from '@/components/SmoothScrollProvider'
-import Navigation from '@/components/Navigation'
+import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
+import Gallery from '@/components/Gallery'
 import Services from '@/components/Services'
-import Portfolio from '@/components/Portfolio'
-import Stats from '@/components/Stats'
 import About from '@/components/About'
 import Testimonials from '@/components/Testimonials'
-import Journey from '@/components/Journey'
-import Studio from '@/components/Studio'
-import Pricing from '@/components/Pricing'
-import FAQ from '@/components/FAQ'
-import FinalCTA from '@/components/FinalCTA'
+import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
-
-const ParticleField = dynamic(() => import('@/components/ParticleField'), { ssr: false })
 
 export default function Home() {
   return (
-    <SmoothScrollProvider>
-      <ParticleField />
-      <Navigation />
+    <>
+      <Navbar />
       <main>
         <Hero />
+        <Gallery />
         <Services />
-        <Portfolio />
-        <Stats />
         <About />
         <Testimonials />
-        <Journey />
-        <Studio />
-        <Pricing />
-        <FAQ />
-        <FinalCTA />
+        <Contact />
       </main>
       <Footer />
-    </SmoothScrollProvider>
+    </>
   )
 }

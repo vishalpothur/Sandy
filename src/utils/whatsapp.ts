@@ -7,27 +7,18 @@ export function openWhatsApp(message = '') {
   window.open(url, '_blank', 'noopener,noreferrer')
 }
 
-export function serviceMessage(name: string) {
-  return (
-    `Hi Sandy! 👋\n\n` +
-    `I'm interested in booking a *${name}* session.\n\n` +
-    `Could you please share details on availability and pricing? 🌸`
-  )
+export function serviceMessage(serviceName: string) {
+  return `Hi Sandy! 👋\n\nI'm interested in booking a *${serviceName}* session.\n\nCould you please share more details on availability and pricing? 🌸`
 }
 
-export function bookingMessage(details: {
-  name: string
-  phone: string
-  service: string
-  message?: string
-}) {
+export function bookingMessage({ name, phone, shootType, message }: { name: string; phone: string; shootType: string; message?: string }) {
   return (
     `Hi Sandy! 👋\n\n` +
-    `I'd love to book a photography session!\n\n` +
-    `📸 *Session:* ${details.service}\n` +
-    `👤 *Name:* ${details.name}\n` +
-    `📞 *Phone:* +91 ${details.phone}\n` +
-    (details.message ? `\n💬 *Note:* ${details.message}\n` : '') +
-    `\nLooking forward to creating beautiful memories! 🌸`
+    `I'd love to book a session with you!\n\n` +
+    `📸 *Session Type:* ${shootType}\n` +
+    `👤 *Name:* ${name}\n` +
+    `📞 *Phone:* +91 ${phone}\n` +
+    (message ? `\n💬 *Message:* ${message}\n` : '') +
+    `\nLooking forward to hearing from you! 🌸`
   )
 }

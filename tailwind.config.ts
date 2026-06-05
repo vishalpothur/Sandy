@@ -1,29 +1,37 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        cream: '#F8F4F1',
-        'cream-light': '#FFF8F6',
-        'cream-warm': '#F7E7E1',
-        blush: '#E8C4C4',
-        lavender: '#D9B8FF',
-        sky: '#BEE3F8',
-        peach: '#FFE5D4',
-        dark: '#1A1A1A',
-        'warm-text': '#2A2A2A',
-        muted: '#8A8A8A',
+        blush: '#e8a598',
+        'blush-light': '#f5d5cf',
+        'blush-dark': '#d4847a',
+        sage: '#8fa68d',
+        'sage-light': '#c4d4c2',
+        terra: '#c97b5a',
+        'terra-light': '#e8b49a',
+        cream: '#fdfaf7',
+        'cream-2': '#f5f0eb',
+        'cream-3': '#ede4da',
+        'warm-dark': '#2d2520',
+        'warm-brown': '#3d2c2c',
+        'warm-mid': '#7a5c5c',
+        'warm-muted': '#a08080',
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         script: ['"Dancing Script"', 'cursive'],
       },
-      backdropBlur: { xs: '2px' },
+      letterSpacing: {
+        widest: '0.25em',
+        ultra: '0.4em',
+      },
     },
   },
   plugins: [],
 }
+
 export default config

@@ -1,85 +1,83 @@
 'use client'
-import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-interface LightboxProps {
-  src: string
-  alt: string
+type Image = { id: number; src: string; title: string; category: string; aspect: string }
+
+export default function Lightbox({ images, currentIndex, onClose, onPrev, onNext }: {
+  images: Image[]
+  currentIndex: number
   onClose: () => void
-  onPrev?: () => void
-  onNext?: () => void
-}
+  onPrev: () => void
+  onNext: () => void
+}) {
+  const [animating, setAnimating] = useState(false)
+  const [direction, setDirection] = useState(0)
+  const touchStartX = useRef<number | null>(null)
 
-export default function Lightbox({ src, alt, onClose, onPrev, onNext }: LightboxProps) {
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft' && onPrev) onPrev()
-      if (e.key === 'ArrowRight' && onNext) onNext()
+      if (e.key === 'ArrowLeft') handlePrev()
+      if (e.key === 'ArrowRight') handleNext()
     }
-    window.addEventListener('keydown', onKey)
+    document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [onClose, onPrev, onNext])
+    return () => { document.removeEventListener('keydown', handleKey); document.body.style.overflow = '' }
+  }, [currentIndex])
+
+  const handlePrev = () => {
+    if (animating) return
+    setDirection(-1); setAnimating(true)
+    setTimeout(() => { onPrev(); setAnimating(false) }, 250)
+  }
+  const handleNext = () => {
+    if (animating) return
+    setDirection(1); setAnimating(true)
+    setTimeout(() => { onNext(); setAnimating(false) }, 250)
+  }
+
+  const img = images[currentIndex]
+  if (!img) return null
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-dark/90 backdrop-blur-md"
-        onClick={onClose}
-      >
-        {/* Image */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="relative max-w-5xl max-h-[90vh] w-full mx-6"
-          onClick={(e) => e.stopPropagation()}
-          style={{ aspectRatio: '4/3' }}
-        >
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-contain rounded-2xl"
-            sizes="(max-width: 1024px) 95vw, 80vw"
-          />
-        </motion.div>
-
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-6 right-6 w-10 h-10 rounded-full glass-dark flex items-center justify-center text-white/80 hover:text-white transition-colors"
-        >
-          ✕
-        </button>
-
-        {/* Prev / Next */}
-        {onPrev && (
-          <button
-            onClick={(e) => { e.stopPropagation(); onPrev() }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass-dark flex items-center justify-center text-white/80 hover:text-white transition-colors text-xl"
-          >
-            ‹
-          </button>
-        )}
-        {onNext && (
-          <button
-            onClick={(e) => { e.stopPropagation(); onNext() }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full glass-dark flex items-center justify-center text-white/80 hover:text-white transition-colors text-xl"
-          >
-            ›
-          </button>
-        )}
-      </motion.div>
-    </AnimatePresence>
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+      onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current === null) return
+        const delta = e.changedTouches[0].clientX - touchStartX.current
+        if (delta > 50) handlePrev(); else if (delta < -50) handleNext()
+        touchStartX.current = null
+      }}
+    >
+      <button onClick={onClose} className="absolute top-6 right-6 z-10 w-10 h-10 flex items-center justify-center border border-white/20 text-white/70 hover:text-white transition-all duration-200" aria-label="Close">
+        <FiX size={20} />
+      </button>
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-xs tracking-widest text-white/50">
+        {currentIndex + 1} / {images.length}
+      </div>
+      <button onClick={handlePrev} className="absolute left-4 md:left-8 z-10 w-12 h-12 flex items-center justify-center border border-white/20 text-white/70 hover:text-white transition-all duration-200" aria-label="Previous">
+        <FiChevronLeft size={24} />
+      </button>
+      <div className="relative max-w-[85vw] max-h-[80vh] flex items-center justify-center transition-all duration-250"
+        style={{ opacity: animating ? 0 : 1, transform: animating ? `translateX(${direction * -30}px)` : 'translateX(0)' }}>
+        <img
+          key={currentIndex}
+          src={img.src.replace('w=800', 'w=1400')}
+          alt={img.title}
+          className="max-w-full max-h-[78vh] object-contain"
+          onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
+        />
+      </div>
+      <button onClick={handleNext} className="absolute right-4 md:right-8 z-10 w-12 h-12 flex items-center justify-center border border-white/20 text-white/70 hover:text-white transition-all duration-200" aria-label="Next">
+        <FiChevronRight size={24} />
+      </button>
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+        <p className="text-blush text-sm tracking-widest font-light">{img.title}</p>
+        <p className="text-white/40 text-xs tracking-wider mt-1">{img.category}</p>
+      </div>
+    </div>
   )
 }
