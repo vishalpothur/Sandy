@@ -2,33 +2,33 @@ import { useState, useEffect, useRef } from 'react'
 import Lightbox from './Lightbox'
 
 const allImages = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80', title: 'Golden Hour Vows', category: 'Weddings', aspect: '3/4' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', title: 'Sacred Union', category: 'Weddings', aspect: '4/3' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'First Dance', category: 'Weddings', aspect: '3/4' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80', title: 'Eternal Promise', category: 'Weddings', aspect: '4/3' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80', title: 'Inner Light', category: 'Portraits', aspect: '3/4' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Quiet Strength', category: 'Portraits', aspect: '3/4' },
-  { id: 7, src: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?w=800&q=80', title: 'Golden Hour', category: 'Portraits', aspect: '1/1' },
-  { id: 8, src: 'https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?w=800&q=80', title: 'Serene Gaze', category: 'Portraits', aspect: '3/4' },
-  { id: 9, src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80', title: 'Editorial Vision', category: 'Fashion', aspect: '4/3' },
-  { id: 10, src: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80', title: 'High Fashion', category: 'Fashion', aspect: '3/4' },
-  { id: 11, src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80', title: 'Avant-Garde', category: 'Fashion', aspect: '3/4' },
-  { id: 12, src: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&q=80', title: 'Couture Dream', category: 'Fashion', aspect: '4/3' },
-  { id: 13, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80', title: 'Grand Opening', category: 'Events', aspect: '4/3' },
-  { id: 14, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Celebration', category: 'Events', aspect: '4/3' },
-  { id: 15, src: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80', title: 'Corporate Summit', category: 'Events', aspect: '3/4' },
-  { id: 16, src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80', title: 'Live Music', category: 'Events', aspect: '4/3' },
-  { id: 17, src: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80', title: 'Mountain Serenity', category: 'Travel', aspect: '4/3' },
-  { id: 18, src: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80', title: 'Ocean Horizon', category: 'Travel', aspect: '4/3' },
-  { id: 19, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', title: 'Alpine Light', category: 'Travel', aspect: '3/4' },
-  { id: 20, src: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80', title: 'Desert Dusk', category: 'Travel', aspect: '4/3' },
-  { id: 21, src: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80', title: 'Together Always', category: 'Weddings', aspect: '3/4' },
-  { id: 22, src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80', title: 'Natural Beauty', category: 'Portraits', aspect: '3/4' },
-  { id: 23, src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&q=80', title: 'Runway Ready', category: 'Fashion', aspect: '3/4' },
-  { id: 24, src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80', title: 'After Party', category: 'Events', aspect: '4/3' },
+  { id: 1, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'Tiny Perfection', category: 'Newborn', aspect: '3/4' },
+  { id: 2, src: 'https://images.unsplash.com/photo-1565087158964-d1b0ab8e77d2?w=800&q=80', title: 'Newborn Hands', category: 'Newborn', aspect: '3/4' },
+  { id: 3, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Sweet Slumber', category: 'Newborn', aspect: '3/4' },
+  { id: 4, src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Pure Joy', category: 'Baby', aspect: '3/4' },
+  { id: 5, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80', title: 'First Smile', category: 'Baby', aspect: '1/1' },
+  { id: 6, src: 'https://images.unsplash.com/photo-1519456264917-42d2b47d2b72?w=800&q=80', title: 'Curious Eyes', category: 'Baby', aspect: '3/4' },
+  { id: 7, src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80', title: 'Little Explorer', category: 'Baby', aspect: '4/3' },
+  { id: 8, src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Golden Afternoon', category: 'Kids', aspect: '4/3' },
+  { id: 9, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Playful Spirit', category: 'Kids', aspect: '3/4' },
+  { id: 10, src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', title: 'Adventure Time', category: 'Kids', aspect: '1/1' },
+  { id: 11, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Giggles & Smiles', category: 'Kids', aspect: '4/3' },
+  { id: 12, src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Glowing Mama', category: 'Maternity', aspect: '3/4' },
+  { id: 13, src: 'https://images.unsplash.com/photo-1583703787657-e84ee23acf05?w=800&q=80', title: 'Beautiful Bump', category: 'Maternity', aspect: '3/4' },
+  { id: 14, src: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80', title: 'Expecting Love', category: 'Maternity', aspect: '3/4' },
+  { id: 15, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Family Bonds', category: 'Families', aspect: '4/3' },
+  { id: 16, src: 'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=800&q=80', title: 'Together Always', category: 'Families', aspect: '4/3' },
+  { id: 17, src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80', title: 'Family Joy', category: 'Families', aspect: '4/3' },
+  { id: 18, src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80', title: 'Sunday Morning', category: 'Families', aspect: '3/4' },
+  { id: 19, src: 'https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80', title: 'New Arrival', category: 'Newborn', aspect: '4/3' },
+  { id: 20, src: 'https://images.unsplash.com/photo-1519689373023-dd07c7988603?w=800&q=80', title: 'Dreamland', category: 'Newborn', aspect: '1/1' },
+  { id: 21, src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Sitter Session', category: 'Baby', aspect: '3/4' },
+  { id: 22, src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80', title: 'Sunshine Kid', category: 'Kids', aspect: '4/3' },
+  { id: 23, src: 'https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80', title: 'Nine Months', category: 'Maternity', aspect: '4/3' },
+  { id: 24, src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80', title: 'Our Tribe', category: 'Families', aspect: '3/4' },
 ]
 
-const FILTERS = ['All', 'Weddings', 'Portraits', 'Fashion', 'Events', 'Travel']
+const FILTERS = ['All', 'Newborn', 'Baby', 'Kids', 'Maternity', 'Families']
 
 function GalleryItem({ image, index, onClick }) {
   const ref = useRef(null)
@@ -53,11 +53,11 @@ function GalleryItem({ image, index, onClick }) {
   return (
     <div
       ref={ref}
-      className="break-inside-avoid mb-4 overflow-hidden cursor-pointer group relative"
+      className="break-inside-avoid mb-4 overflow-hidden cursor-pointer group relative rounded-xl"
       style={{ opacity: 0 }}
       onClick={() => onClick(image)}
     >
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-xl">
         <img
           src={image.src}
           alt={image.title}
@@ -66,12 +66,13 @@ function GalleryItem({ image, index, onClick }) {
           style={{ aspectRatio: image.aspect }}
           onLoad={(e) => e.target.classList.add('loaded')}
         />
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col items-start justify-end p-4">
-          <p className="text-[10px] tracking-widest text-gold uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+        {/* Hover overlay — soft blush */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-4"
+          style={{ background: 'rgba(232,165,152,0.75)' }}>
+          <p className="text-terra text-xs tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75 font-medium">
             {image.category}
           </p>
-          <p className="text-white font-serif text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+          <p className="text-warm-brown font-serif text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
             {image.title}
           </p>
         </div>
@@ -102,13 +103,13 @@ export default function Gallery() {
   }
 
   return (
-    <section id="gallery" className="py-24 px-6 bg-[#080808]">
+    <section id="gallery" className="py-24 px-6 bg-cream">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-[10px] tracking-ultra text-gold font-light uppercase mb-4">Portfolio</p>
-          <h2 className="font-serif text-5xl md:text-6xl font-light text-white mb-6">Selected Work</h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
+          <p className="font-script text-3xl text-terra mb-2">Our Portfolio</p>
+          <h2 className="font-serif text-5xl md:text-6xl font-light text-warm-brown mb-6">Stories We've Told</h2>
+          <div className="w-16 h-0.5 bg-blush mx-auto" />
         </div>
 
         {/* Filter tabs */}
@@ -117,13 +118,13 @@ export default function Gallery() {
             <button
               key={filter}
               onClick={() => handleFilterChange(filter)}
-              className={`px-6 py-2 text-xs tracking-widest transition-all duration-300 ${
+              className={`px-6 py-2 text-sm rounded-full transition-all duration-300 ${
                 activeFilter === filter
-                  ? 'bg-gold text-[#080808] font-semibold'
-                  : 'border border-white/20 text-white/60 hover:border-gold hover:text-gold'
+                  ? 'bg-terra text-white font-medium'
+                  : 'bg-cream-3 text-warm-mid hover:bg-blush-light'
               }`}
             >
-              {filter.toUpperCase()}
+              {filter}
             </button>
           ))}
         </div>

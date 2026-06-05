@@ -20,7 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     gsap.from(navRef.current, {
-      y: -100,
+      y: -20,
       opacity: 0,
       duration: 1,
       ease: 'power3.out',
@@ -43,7 +43,9 @@ export default function Navbar() {
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-          scrolled ? 'bg-[#080808]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+          scrolled
+            ? 'bg-cream/95 backdrop-blur-md shadow-sm'
+            : 'bg-cream/80 backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -53,8 +55,8 @@ export default function Navbar() {
             onClick={(e) => handleNav(e, '#hero')}
             className="flex flex-col leading-none cursor-pointer"
           >
-            <span className="font-serif text-2xl font-light tracking-widest text-white">SANDY</span>
-            <span className="text-[9px] tracking-ultra text-gold font-light">PHOTOGRAPHY</span>
+            <span className="font-script text-3xl text-warm-brown">Sandy</span>
+            <span className="text-[9px] tracking-widest text-warm-muted font-light">Photography</span>
           </a>
 
           {/* Desktop links */}
@@ -64,9 +66,9 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={(e) => handleNav(e, link.href)}
-                  className="gold-underline text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 font-light"
+                  className="terra-underline text-sm text-warm-mid hover:text-terra transition-colors duration-300 font-light"
                 >
-                  {link.label.toUpperCase()}
+                  {link.label}
                 </a>
               </li>
             ))}
@@ -77,9 +79,9 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleNav(e, '#contact')}
-              className="px-6 py-2 border border-gold text-gold text-xs tracking-widest hover:bg-gold hover:text-[#080808] transition-all duration-300 font-medium"
+              className="px-6 py-2 bg-terra text-white text-sm rounded-full hover:bg-terra-light transition-all duration-300 font-medium"
             >
-              BOOK NOW
+              Book Now
             </a>
           </div>
 
@@ -89,16 +91,16 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`block h-px bg-white transition-all duration-300 ${menuOpen ? 'w-6 rotate-45 translate-y-[9px]' : 'w-6'}`} />
-            <span className={`block h-px bg-white transition-all duration-300 ${menuOpen ? 'opacity-0 w-0' : 'w-4'}`} />
-            <span className={`block h-px bg-white transition-all duration-300 ${menuOpen ? 'w-6 -rotate-45 -translate-y-[3px]' : 'w-6'}`} />
+            <span className={`block h-px bg-warm-brown transition-all duration-300 ${menuOpen ? 'w-6 rotate-45 translate-y-[9px]' : 'w-6'}`} />
+            <span className={`block h-px bg-warm-brown transition-all duration-300 ${menuOpen ? 'opacity-0 w-0' : 'w-4'}`} />
+            <span className={`block h-px bg-warm-brown transition-all duration-300 ${menuOpen ? 'w-6 -rotate-45 -translate-y-[3px]' : 'w-6'}`} />
           </button>
         </div>
       </nav>
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-[99] bg-[#080808]/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ${
+        className={`fixed inset-0 z-[99] bg-cream/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -108,7 +110,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 onClick={(e) => handleNav(e, link.href)}
-                className="font-serif text-4xl font-light text-white hover:text-gold transition-colors duration-300"
+                className="font-serif text-4xl font-light text-warm-brown hover:text-terra transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -118,9 +120,9 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleNav(e, '#contact')}
-              className="px-8 py-3 border border-gold text-gold text-sm tracking-widest hover:bg-gold hover:text-[#080808] transition-all duration-300 mt-4 inline-block"
+              className="px-8 py-3 bg-terra text-white text-sm rounded-full hover:bg-terra-light transition-all duration-300 mt-4 inline-block"
             >
-              BOOK NOW
+              Book Now
             </a>
           </li>
         </ul>

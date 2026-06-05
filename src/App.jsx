@@ -35,7 +35,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-[#080808] text-white overflow-x-hidden">
+    <div className="bg-cream text-warm-brown overflow-x-hidden">
       <Navbar />
       <Hero />
       <ScrollShowcase />

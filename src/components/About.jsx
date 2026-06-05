@@ -5,18 +5,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
-  { value: 12, suffix: '+', label: 'Years Experience' },
-  { value: 500, suffix: '+', label: 'Sessions Done' },
-  { value: 15, suffix: '', label: 'Awards Won' },
-  { value: 20, suffix: '+', label: 'Cities Covered' },
+  { value: 8, suffix: '+', label: 'Years Experience' },
+  { value: 300, suffix: '+', label: 'Families' },
+  { value: 5, suffix: '★', label: 'Reviews' },
+  { value: 0, suffix: '', label: 'India & Abroad', isText: true, text: '🌏' },
 ]
 
-function StatCounter({ value, suffix, label }) {
+function StatCounter({ value, suffix, label, isText, text }) {
   const [count, setCount] = useState(0)
   const ref = useRef(null)
   const started = useRef(false)
 
   useLayoutEffect(() => {
+    if (isText) return
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(([entry]) => {
@@ -34,14 +35,14 @@ function StatCounter({ value, suffix, label }) {
     }, { threshold: 0.5 })
     observer.observe(el)
     return () => observer.disconnect()
-  }, [value])
+  }, [value, isText])
 
   return (
-    <div ref={ref} className="text-center">
-      <p className="font-serif text-4xl md:text-5xl font-light text-gold">
-        {count}{suffix}
+    <div ref={ref} className="text-center bg-cream-2 rounded-2xl p-4">
+      <p className="font-serif text-3xl md:text-4xl font-semibold text-terra">
+        {isText ? text : `${count}${suffix}`}
       </p>
-      <p className="text-white/50 text-xs tracking-widest mt-1 uppercase">{label}</p>
+      <p className="text-warm-mid text-xs tracking-widest mt-1">{label}</p>
     </div>
   )
 }
@@ -76,57 +77,50 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 px-6 bg-[#0a0a0a]">
+    <section id="about" ref={sectionRef} className="py-24 px-6 bg-cream">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-        {/* Left: Image with double-border frame */}
+        {/* Left: Image */}
         <div ref={imgRef} className="relative">
-          <div className="relative">
-            {/* Outer decorative border */}
-            <div className="absolute -top-4 -left-4 w-full h-full border border-gold/30 pointer-events-none z-10" />
-            {/* Inner decorative border */}
-            <div className="absolute -top-2 -left-2 w-full h-full border border-gold/15 pointer-events-none z-10" />
-            <div className="overflow-hidden aspect-[4/5]">
-              <img
-                src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80"
-                alt="Sandy — Photographer"
-                loading="lazy"
-                className="w-full h-full object-cover"
-                onLoad={(e) => e.target.classList.add('loaded')}
-              />
-            </div>
+          <div className="overflow-hidden rounded-3xl aspect-[4/5] shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1559734840-f9509ee5677f?w=800&q=80"
+              alt="Sandy — Photographer with baby"
+              loading="lazy"
+              className="w-full h-full object-cover"
+              onLoad={(e) => e.target.classList.add('loaded')}
+            />
           </div>
-
           {/* Floating badge */}
-          <div className="absolute -bottom-6 -right-6 bg-gold px-6 py-4 z-20">
-            <p className="text-[#080808] font-serif text-lg font-semibold">12+</p>
-            <p className="text-[#080808] text-[9px] tracking-widest">YEARS OF CRAFT</p>
+          <div className="absolute -bottom-6 -right-6 bg-terra px-6 py-4 z-20 rounded-2xl shadow-lg">
+            <p className="text-white font-serif text-lg font-semibold">8+</p>
+            <p className="text-white/80 text-[9px] tracking-widest">YEARS OF LOVE</p>
           </div>
         </div>
 
         {/* Right: Text content */}
         <div>
-          <p ref={labelRef} className="text-[10px] tracking-ultra text-gold font-light uppercase mb-6">About Sandy</p>
+          <p ref={labelRef} className="font-script text-3xl text-blush mb-4">About Sandy</p>
 
-          <h2 ref={headingRef} className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-8">
-            Passion. Vision.<br />
-            <em className="italic">Timeless Art.</em>
+          <h2 ref={headingRef} className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-warm-brown leading-tight mb-8">
+            Hi, I'm Sandy!<br />
+            Your Little Ones'<br />
+            <em className="italic">Favourite Photographer</em>
           </h2>
 
-          <p ref={para1Ref} className="text-white/60 font-light leading-relaxed mb-6">
-            With over twelve years behind the lens, Sandy has built a reputation as one of India's most sought-after
-            photographers. From the snow-capped Himalayas to the sun-drenched beaches of Kerala, every frame is crafted
-            with an artist's eye and a storyteller's soul.
+          <p ref={para1Ref} className="text-warm-mid font-light leading-relaxed mb-6">
+            I'm a passionate lifestyle photographer based in India, and there is nothing I love more than
+            photographing the tiniest fingers, the toothless grins, and the bump that holds the most exciting
+            secret in the world.
           </p>
 
-          <p ref={para2Ref} className="text-white/60 font-light leading-relaxed mb-10">
-            Specializing in weddings, portraits, fashion editorials, and travel photography, Sandy brings a cinematic
-            quality to every shoot. The work has been featured in leading Indian lifestyle magazines and has earned
-            recognition at national photography awards.
+          <p ref={para2Ref} className="text-warm-mid font-light leading-relaxed mb-10">
+            Every session is relaxed, fun, and totally tailored to your family. No stiff poses — just real
+            moments, real love, and real magic.
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-10 py-8 border-t border-b border-white/10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             {stats.map((stat) => (
               <StatCounter key={stat.label} {...stat} />
             ))}
@@ -138,9 +132,9 @@ export default function About() {
               href="https://wa.me/918099865977"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-8 py-4 bg-gold text-[#080808] text-xs tracking-widest font-semibold hover:bg-gold-light transition-colors duration-300"
+              className="inline-block px-8 py-4 bg-terra text-white text-sm rounded-full font-medium hover:bg-terra-light transition-colors duration-300"
             >
-              CONNECT ON WHATSAPP
+              Connect on WhatsApp
             </a>
           </div>
         </div>
