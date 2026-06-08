@@ -5,32 +5,28 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Tick marks around the aperture ring
-function ApertureRing({ size, ticks = 36 }: { size: number; ticks?: number }) {
+function ApertureRing({ pct, ticks = 36 }: { pct: number; ticks?: number }) {
+  const s = 100
+  const r = s / 2 - 3
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
+      viewBox={`0 0 ${s} ${s}`}
       className="absolute pointer-events-none"
-      style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 20 }}
+      style={{ top: `${-pct}%`, left: `${-pct}%`, width: `${100 + pct * 2}%`, height: `${100 + pct * 2}%`, zIndex: 20 }}
     >
       {Array.from({ length: ticks }).map((_, i) => {
         const angle = (i / ticks) * 360
         const rad = (angle * Math.PI) / 180
-        const r = size / 2 - 4
-        const tickLen = i % 9 === 0 ? 10 : i % 3 === 0 ? 6 : 3
-        const x1 = size / 2 + (r - tickLen) * Math.cos(rad)
-        const y1 = size / 2 + (r - tickLen) * Math.sin(rad)
-        const x2 = size / 2 + r * Math.cos(rad)
-        const y2 = size / 2 + r * Math.sin(rad)
-        return (
-          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="rgba(201,123,90,0.55)" strokeWidth={i % 9 === 0 ? 1.5 : 0.8} />
-        )
+        const tickLen = i % 9 === 0 ? 8 : i % 3 === 0 ? 5 : 2.5
+        const x1 = s / 2 + (r - tickLen) * Math.cos(rad)
+        const y1 = s / 2 + (r - tickLen) * Math.sin(rad)
+        const x2 = s / 2 + r * Math.cos(rad)
+        const y2 = s / 2 + r * Math.sin(rad)
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke="rgba(201,123,90,0.6)" strokeWidth={i % 9 === 0 ? 0.8 : 0.4} />
       })}
-      <circle cx={size / 2} cy={size / 2} r={size / 2 - 18}
-        fill="none" stroke="rgba(201,123,90,0.25)" strokeWidth="1" />
+      <circle cx={s / 2} cy={s / 2} r={r - 10}
+        fill="none" stroke="rgba(201,123,90,0.2)" strokeWidth="0.5" />
     </svg>
   )
 }
@@ -44,20 +40,17 @@ export default function ScrollShowcase() {
 
     mm.add('(min-width: 768px)', () => {
       const ctx = gsap.context(() => {
-
-        // All photos start as closed iris
-        gsap.set('#photo-c', { clipPath: 'circle(0% at 50% 50%)', scale: 1.08 })
-        gsap.set('#photo-l', { clipPath: 'circle(0% at 50% 50%)', scale: 1.08 })
-        gsap.set('#photo-r', { clipPath: 'circle(0% at 50% 50%)', scale: 1.08 })
+        gsap.set('#photo-c', { clipPath: 'circle(0% at 50% 50%)' })
+        gsap.set('#photo-l', { clipPath: 'circle(0% at 50% 50%)' })
+        gsap.set('#photo-r', { clipPath: 'circle(0% at 50% 50%)' })
         gsap.set('#ring-c',  { rotation: -120, opacity: 0, transformOrigin: '50% 50%' })
         gsap.set('#ring-l',  { opacity: 0, scale: 0.85, transformOrigin: '50% 50%' })
         gsap.set('#ring-r',  { opacity: 0, scale: 0.85, transformOrigin: '50% 50%' })
-        gsap.set('#iris-label',    { opacity: 0, y: 16 })
-        gsap.set('#iris-heading',  { opacity: 0, y: 20 })
-        gsap.set('#iris-sub',      { opacity: 0 })
-        gsap.set(['#wrap-l', '#wrap-r'], { opacity: 0 })
-        gsap.set('#iris-fstop',    { opacity: 0 })
-        gsap.set('#iris-scanline', { scaleX: 0, transformOrigin: '0% 50%', opacity: 0 })
+        gsap.set('#iris-label',   { opacity: 0, y: 14 })
+        gsap.set('#iris-heading', { opacity: 0, y: 18 })
+        gsap.set('#iris-sub',     { opacity: 0 })
+        gsap.set(['#wrap-l','#wrap-r'], { opacity: 0 })
+        gsap.set('#iris-fstop',   { opacity: 0 })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -70,36 +63,25 @@ export default function ScrollShowcase() {
           },
         })
 
-        // Phase 1 — center iris opens + ring spins in
         tl
-          .to('#ring-c',    { rotation: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, 0)
-          .to('#iris-scanline', { scaleX: 1, opacity: 1, duration: 0.25 }, 0.04)
-          .to('#photo-c',   { clipPath: 'circle(72% at 50% 50%)', scale: 1, duration: 0.45, ease: 'power3.inOut' }, 0.08)
-
-        // Phase 2 — side iris open + text reveal
-          .to(['#wrap-l','#wrap-r'], { opacity: 1, duration: 0.2 }, 0.35)
-          .to(['#ring-l','#ring-r'], { opacity: 1, scale: 1, duration: 0.25 }, 0.38)
-          .to('#photo-l',   { clipPath: 'circle(72% at 50% 50%)', scale: 1, duration: 0.3, ease: 'power2.inOut' }, 0.40)
-          .to('#photo-r',   { clipPath: 'circle(72% at 50% 50%)', scale: 1, duration: 0.3, ease: 'power2.inOut' }, 0.46)
-          .to('#iris-label',   { opacity: 1, y: 0, duration: 0.2 }, 0.50)
-          .to('#iris-heading', { opacity: 1, y: 0, duration: 0.25 }, 0.54)
-          .to('#iris-sub',     { opacity: 1, duration: 0.2 }, 0.60)
-          .to('#iris-fstop',   { opacity: 1, duration: 0.2 }, 0.60)
-
-        // Phase 3 — ring slowly rotates (hold)
-          .to('#ring-c',    { rotation: 60, duration: 0.3 }, 0.55)
-
-        // Phase 4 — close all irises
-          .to('#iris-label',   { opacity: 0, duration: 0.15 }, 0.76)
-          .to('#iris-heading', { opacity: 0, y: -10, duration: 0.15 }, 0.78)
-          .to('#iris-sub',     { opacity: 0, duration: 0.12 }, 0.78)
-          .to('#iris-fstop',   { opacity: 0, duration: 0.12 }, 0.78)
-          .to('#iris-scanline',{ opacity: 0, duration: 0.1 }, 0.78)
-          .to('#photo-l',   { clipPath: 'circle(0% at 50% 50%)', scale: 1.08, duration: 0.22, ease: 'power3.in' }, 0.78)
-          .to('#photo-r',   { clipPath: 'circle(0% at 50% 50%)', scale: 1.08, duration: 0.22, ease: 'power3.in' }, 0.80)
+          .to('#ring-c',   { rotation: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, 0)
+          .to('#photo-c',  { clipPath: 'circle(72% at 50% 50%)', duration: 0.45, ease: 'power3.inOut' }, 0.06)
+          .to(['#wrap-l','#wrap-r'], { opacity: 1, duration: 0.2 }, 0.32)
+          .to(['#ring-l','#ring-r'], { opacity: 1, scale: 1, duration: 0.25 }, 0.35)
+          .to('#photo-l',  { clipPath: 'circle(72% at 50% 50%)', duration: 0.3, ease: 'power2.inOut' }, 0.37)
+          .to('#photo-r',  { clipPath: 'circle(72% at 50% 50%)', duration: 0.3, ease: 'power2.inOut' }, 0.43)
+          .to('#iris-label',   { opacity: 1, y: 0, duration: 0.2 }, 0.48)
+          .to('#iris-heading', { opacity: 1, y: 0, duration: 0.25 }, 0.52)
+          .to('#iris-sub',     { opacity: 1, duration: 0.2 }, 0.58)
+          .to('#iris-fstop',   { opacity: 1, duration: 0.2 }, 0.58)
+          .to('#ring-c',   { rotation: 60, duration: 0.3 }, 0.52)
+          // close
+          .to(['#iris-label','#iris-heading','#iris-sub','#iris-fstop'], { opacity: 0, duration: 0.15 }, 0.76)
+          .to('#photo-l',  { clipPath: 'circle(0% at 50% 50%)', duration: 0.22, ease: 'power3.in' }, 0.78)
+          .to('#photo-r',  { clipPath: 'circle(0% at 50% 50%)', duration: 0.22, ease: 'power3.in' }, 0.80)
           .to(['#ring-l','#ring-r'], { opacity: 0, scale: 0.7, duration: 0.2 }, 0.80)
-          .to('#photo-c',   { clipPath: 'circle(0% at 50% 50%)', scale: 1.12, duration: 0.28, ease: 'power3.in' }, 0.82)
-          .to('#ring-c',    { opacity: 0, scale: 1.2, rotation: 120, duration: 0.25 }, 0.84)
+          .to('#photo-c',  { clipPath: 'circle(0% at 50% 50%)', duration: 0.28, ease: 'power3.in' }, 0.82)
+          .to('#ring-c',   { opacity: 0, scale: 1.15, rotation: 120, duration: 0.25 }, 0.84)
 
       }, wrapRef)
       return () => ctx.revert()
@@ -108,8 +90,6 @@ export default function ScrollShowcase() {
     mm.add('(max-width: 767px)', () => {
       const ctx = gsap.context(() => {
         gsap.set('#photo-c', { clipPath: 'circle(0% at 50% 50%)' })
-        gsap.from('#iris-label',   { opacity: 0, duration: 0.5, delay: 0.4 })
-        gsap.from('#iris-heading', { opacity: 0, y: 20, duration: 0.6, delay: 0.55 })
         gsap.to('#photo-c', {
           clipPath: 'circle(72% at 50% 50%)', duration: 1, ease: 'power3.inOut',
           scrollTrigger: { trigger: wrapRef.current, start: 'top 80%', once: true },
@@ -125,100 +105,88 @@ export default function ScrollShowcase() {
     <div ref={wrapRef} style={{ height: '420vh' }}>
       <div
         ref={pinRef}
-        className="w-full h-screen overflow-hidden flex flex-col items-center justify-center relative"
-        style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, #14100d 0%, #09080e 70%, #060509 100%)' }}
+        className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden"
+        style={{ background: 'radial-gradient(ellipse 90% 80% at 50% 45%, #2a1a0e 0%, #1a100a 45%, #110b06 100%)' }}
       >
-        {/* Ambient glow behind center */}
+        {/* Ambient glow */}
         <div className="absolute pointer-events-none" style={{
-          width: '40vw', height: '40vw', borderRadius: '50%', top: '50%', left: '50%',
-          transform: 'translate(-50%, -60%)',
-          background: 'radial-gradient(circle, rgba(201,123,90,0.08) 0%, transparent 70%)',
+          width: '50vw', height: '50vw', borderRadius: '50%',
+          top: '50%', left: '50%', transform: 'translate(-50%, -55%)',
+          background: 'radial-gradient(circle, rgba(201,123,90,0.10) 0%, transparent 65%)',
         }} />
 
-        {/* F-stop / shutter decorative text */}
+        {/* F-stop decorative */}
         <div id="iris-fstop" className="absolute top-8 left-8 hidden md:flex flex-col gap-1 font-mono text-xs"
-          style={{ color: 'rgba(201,123,90,0.45)' }}>
+          style={{ color: 'rgba(201,123,90,0.5)', opacity: 0 }}>
           <span>ƒ / 1.8</span>
           <span>1/500s</span>
           <span>ISO 200</span>
         </div>
-        <div className="absolute top-8 right-8 hidden md:block font-mono text-xs" style={{ color: 'rgba(201,123,90,0.3)' }}>
-          <span id="iris-fstop">SANDY · PHOTOGRAPHY</span>
+        <div className="absolute top-8 right-8 hidden md:block font-mono text-xs"
+          style={{ color: 'rgba(201,123,90,0.35)', letterSpacing: '0.2em' }}>
+          SANDY · PHOTOGRAPHY
         </div>
 
-        {/* Scan line */}
-        <div id="iris-scanline" className="absolute hidden md:block" style={{
-          left: 0, right: 0, height: '1px',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(201,123,90,0.6) 30%, rgba(255,200,150,0.9) 50%, rgba(201,123,90,0.6) 70%, transparent 100%)',
-          top: '50%',
-          boxShadow: '0 0 8px rgba(201,123,90,0.5)',
-        }} />
+        {/* Circles row — sized to leave room for text */}
+        <div className="relative flex items-center justify-center gap-5 md:gap-8"
+          style={{ marginBottom: 'clamp(20px, 3vh, 36px)' }}>
 
-        {/* Main composition */}
-        <div className="relative flex items-center justify-center gap-6 md:gap-10">
-
-          {/* Left circle */}
+          {/* Left */}
           <div id="wrap-l" className="hidden md:block relative flex-shrink-0"
-            style={{ width: 'clamp(130px, 14vw, 190px)', height: 'clamp(130px, 14vw, 190px)' }}>
-            <div className="relative w-full h-full">
-              <ApertureRing size={220} ticks={24} />
-              <div id="ring-l" className="absolute rounded-full pointer-events-none" style={{
-                inset: '-8px', border: '1px solid rgba(201,123,90,0.35)', borderRadius: '50%',
-                boxShadow: '0 0 16px rgba(201,123,90,0.12)',
-              }} />
-              <div id="photo-l" className="w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: '0 0 30px rgba(201,123,90,0.15)' }}>
-                <img src="/photos/kids-books.jpg" alt="Kids" className="w-full h-full object-cover loaded" />
-              </div>
+            style={{ width: 'clamp(110px,12vw,170px)', height: 'clamp(110px,12vw,170px)', opacity: 0 }}>
+            <ApertureRing pct={18} ticks={24} />
+            <div id="ring-l" className="absolute rounded-full pointer-events-none" style={{
+              inset: '-7px', border: '1px solid rgba(201,123,90,0.4)', borderRadius: '50%',
+              boxShadow: '0 0 14px rgba(201,123,90,0.12)',
+            }} />
+            <div id="photo-l" className="w-full h-full rounded-full overflow-hidden">
+              <img src="/photos/kids-books.jpg" alt="Kids" className="w-full h-full object-cover loaded" />
             </div>
           </div>
 
-          {/* Center circle */}
-          <div className="relative flex-shrink-0"
-            style={{ width: 'clamp(240px, 32vw, 430px)', height: 'clamp(240px, 32vw, 430px)' }}>
-            <div className="relative w-full h-full">
-              <ApertureRing size={580} ticks={60} />
-              <div id="ring-c" className="absolute rounded-full pointer-events-none" style={{
-                inset: '-14px', border: '1.5px solid rgba(201,123,90,0.5)', borderRadius: '50%',
-                boxShadow: '0 0 40px rgba(201,123,90,0.15), inset 0 0 40px rgba(201,123,90,0.04)',
-              }} />
-              <div id="photo-c" className="w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: '0 0 60px rgba(201,123,90,0.2)' }}>
-                <img src="/photos/kids-outdoor.jpg" alt="Sandy Photography" className="w-full h-full object-cover loaded" />
-              </div>
+          {/* Center — capped so it never overflows viewport height */}
+          <div className="relative flex-shrink-0" style={{
+            width: 'min(clamp(220px,30vw,400px), 55vh)',
+            height: 'min(clamp(220px,30vw,400px), 55vh)',
+          }}>
+            <ApertureRing pct={20} ticks={60} />
+            <div id="ring-c" className="absolute rounded-full pointer-events-none" style={{
+              inset: '-13px', border: '1.5px solid rgba(201,123,90,0.55)', borderRadius: '50%',
+              boxShadow: '0 0 40px rgba(201,123,90,0.15), inset 0 0 30px rgba(201,123,90,0.05)',
+            }} />
+            <div id="photo-c" className="w-full h-full rounded-full overflow-hidden"
+              style={{ boxShadow: '0 0 50px rgba(201,123,90,0.18)' }}>
+              <img src="/photos/kids-outdoor.jpg" alt="Sandy Photography" className="w-full h-full object-cover loaded" />
             </div>
           </div>
 
-          {/* Right circle */}
+          {/* Right */}
           <div id="wrap-r" className="hidden md:block relative flex-shrink-0"
-            style={{ width: 'clamp(130px, 14vw, 190px)', height: 'clamp(130px, 14vw, 190px)' }}>
-            <div className="relative w-full h-full">
-              <ApertureRing size={220} ticks={24} />
-              <div id="ring-r" className="absolute rounded-full pointer-events-none" style={{
-                inset: '-8px', border: '1px solid rgba(201,123,90,0.35)', borderRadius: '50%',
-                boxShadow: '0 0 16px rgba(201,123,90,0.12)',
-              }} />
-              <div id="photo-r" className="w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: '0 0 30px rgba(201,123,90,0.15)' }}>
-                <img src="/photos/kids-cake-smash.jpg" alt="Events" className="w-full h-full object-cover loaded" />
-              </div>
+            style={{ width: 'clamp(110px,12vw,170px)', height: 'clamp(110px,12vw,170px)', opacity: 0 }}>
+            <ApertureRing pct={18} ticks={24} />
+            <div id="ring-r" className="absolute rounded-full pointer-events-none" style={{
+              inset: '-7px', border: '1px solid rgba(201,123,90,0.4)', borderRadius: '50%',
+              boxShadow: '0 0 14px rgba(201,123,90,0.12)',
+            }} />
+            <div id="photo-r" className="w-full h-full rounded-full overflow-hidden">
+              <img src="/photos/kids-cake-smash.jpg" alt="Events" className="w-full h-full object-cover loaded" />
             </div>
           </div>
 
         </div>
 
-        {/* Text below */}
-        <div className="mt-10 md:mt-14 text-center z-20">
-          <p id="iris-label" className="font-script mb-2" style={{ fontSize: 'clamp(1.2rem,2.5vw,1.8rem)', color: '#c97b5a' }}>
+        {/* Text */}
+        <div className="text-center z-20 px-4">
+          <p id="iris-label" className="font-script mb-1" style={{ fontSize: 'clamp(1.1rem,2vw,1.6rem)', color: '#c97b5a', opacity: 0 }}>
             Sandy Photography
           </p>
           <h2 id="iris-heading" className="font-serif font-light text-white leading-tight"
-            style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)' }}>
+            style={{ fontSize: 'clamp(1.4rem,3vw,2.6rem)', opacity: 0 }}>
             Every Giggle,{' '}
-            <em className="italic" style={{ color: 'rgba(201,123,90,0.9)' }}>Every Milestone</em>
+            <em className="italic" style={{ color: 'rgba(232,165,152,0.95)' }}>Every Milestone</em>
           </h2>
-          <p id="iris-sub" className="mt-3 font-mono tracking-widest uppercase text-xs"
-            style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <p id="iris-sub" className="mt-2 font-mono tracking-widest uppercase text-xs"
+            style={{ color: 'rgba(255,255,255,0.3)', opacity: 0 }}>
             Authentic moments · Captured forever
           </p>
         </div>
