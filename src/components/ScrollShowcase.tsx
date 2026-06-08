@@ -106,13 +106,17 @@ export default function ScrollShowcase() {
       <div
         ref={pinRef}
         className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden"
-        style={{ background: 'radial-gradient(ellipse 90% 80% at 50% 45%, #2a1a0e 0%, #1a100a 45%, #110b06 100%)' }}
+        style={{
+          background: 'radial-gradient(ellipse 90% 80% at 50% 45%, #5c3420 0%, #3a1e0e 40%, #241208 100%)',
+          paddingTop: '80px',
+          paddingBottom: '16px',
+        }}
       >
         {/* Ambient glow */}
         <div className="absolute pointer-events-none" style={{
           width: '50vw', height: '50vw', borderRadius: '50%',
-          top: '50%', left: '50%', transform: 'translate(-50%, -55%)',
-          background: 'radial-gradient(circle, rgba(201,123,90,0.10) 0%, transparent 65%)',
+          top: '45%', left: '50%', transform: 'translate(-50%, -50%)',
+          background: 'radial-gradient(circle, rgba(201,123,90,0.12) 0%, transparent 65%)',
         }} />
 
         {/* F-stop decorative */}
@@ -127,14 +131,14 @@ export default function ScrollShowcase() {
           SANDY · PHOTOGRAPHY
         </div>
 
-        {/* Circles row — sized to leave room for text */}
+        {/* Circles row */}
         <div className="relative flex items-center justify-center gap-5 md:gap-8"
-          style={{ marginBottom: 'clamp(20px, 3vh, 36px)' }}>
+          style={{ marginBottom: 'clamp(16px, 2vh, 28px)' }}>
 
           {/* Left */}
           <div id="wrap-l" className="hidden md:block relative flex-shrink-0"
-            style={{ width: 'clamp(110px,12vw,170px)', height: 'clamp(110px,12vw,170px)', opacity: 0 }}>
-            <ApertureRing pct={18} ticks={24} />
+            style={{ width: 'clamp(100px,11vw,155px)', height: 'clamp(100px,11vw,155px)', opacity: 0 }}>
+            <ApertureRing pct={14} ticks={24} />
             <div id="ring-l" className="absolute rounded-full pointer-events-none" style={{
               inset: '-7px', border: '1px solid rgba(201,123,90,0.4)', borderRadius: '50%',
               boxShadow: '0 0 14px rgba(201,123,90,0.12)',
@@ -144,12 +148,12 @@ export default function ScrollShowcase() {
             </div>
           </div>
 
-          {/* Center — capped so it never overflows viewport height */}
+          {/* Center */}
           <div className="relative flex-shrink-0" style={{
-            width: 'min(clamp(220px,30vw,400px), 55vh)',
-            height: 'min(clamp(220px,30vw,400px), 55vh)',
+            width: 'min(clamp(200px,26vw,360px), 44vh)',
+            height: 'min(clamp(200px,26vw,360px), 44vh)',
           }}>
-            <ApertureRing pct={20} ticks={60} />
+            <ApertureRing pct={16} ticks={60} />
             <div id="ring-c" className="absolute rounded-full pointer-events-none" style={{
               inset: '-13px', border: '1.5px solid rgba(201,123,90,0.55)', borderRadius: '50%',
               boxShadow: '0 0 40px rgba(201,123,90,0.15), inset 0 0 30px rgba(201,123,90,0.05)',
@@ -162,8 +166,8 @@ export default function ScrollShowcase() {
 
           {/* Right */}
           <div id="wrap-r" className="hidden md:block relative flex-shrink-0"
-            style={{ width: 'clamp(110px,12vw,170px)', height: 'clamp(110px,12vw,170px)', opacity: 0 }}>
-            <ApertureRing pct={18} ticks={24} />
+            style={{ width: 'clamp(100px,11vw,155px)', height: 'clamp(100px,11vw,155px)', opacity: 0 }}>
+            <ApertureRing pct={14} ticks={24} />
             <div id="ring-r" className="absolute rounded-full pointer-events-none" style={{
               inset: '-7px', border: '1px solid rgba(201,123,90,0.4)', borderRadius: '50%',
               boxShadow: '0 0 14px rgba(201,123,90,0.12)',
