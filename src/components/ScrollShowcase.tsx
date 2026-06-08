@@ -14,12 +14,10 @@ export default function ScrollShowcase() {
 
     mm.add('(min-width: 768px)', () => {
       const ctx = gsap.context(() => {
-        // Initial states
-        gsap.set('#ss-thumb-tl',  { x: -80, opacity: 0 })
-        gsap.set('#ss-side-r1',   { x:  80, opacity: 0 })
-        gsap.set('#ss-side-r2',   { x:  80, opacity: 0 })
-        gsap.set('#ss-center',    { scale: 0.92, opacity: 0 })
-        gsap.set('#ss-overlay',   { y: 24, opacity: 0 })
+        // Side cards start off-screen; center & overlay start visible
+        gsap.set('#ss-thumb-tl', { x: -80, opacity: 0 })
+        gsap.set('#ss-side-r1',  { x:  80, opacity: 0 })
+        gsap.set('#ss-side-r2',  { x:  80, opacity: 0 })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -33,17 +31,16 @@ export default function ScrollShowcase() {
         })
 
         tl
-          .to('#ss-center',   { scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0)
-          .to('#ss-thumb-tl', { x: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.1)
-          .to('#ss-side-r1',  { x: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.18)
-          .to('#ss-side-r2',  { x: 0, opacity: 0.7, duration: 0.35, ease: 'power2.out' }, 0.24)
-          .to('#ss-overlay',  { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.32)
-          // Phase 2: subtle breathe
-          .to('#ss-center',   { scale: 1.03, duration: 0.3 }, 0.55)
-          // Phase 3: fade out
-          .to(['#ss-thumb-tl','#ss-side-r1','#ss-side-r2'], { opacity: 0, x: 0, duration: 0.2 }, 0.78)
-          .to('#ss-overlay',  { y: -20, opacity: 0, duration: 0.18 }, 0.80)
-          .to('#ss-center',   { scale: 1.12, opacity: 0, duration: 0.22, ease: 'power2.in' }, 0.80)
+          // Phase 1 — side cards fly in
+          .to('#ss-thumb-tl', { x: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, 0)
+          .to('#ss-side-r1',  { x: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.08)
+          .to('#ss-side-r2',  { x: 0, opacity: 0.7, duration: 0.35, ease: 'power2.out' }, 0.16)
+          // Phase 2 — subtle breathe on center
+          .to('#ss-center',   { scale: 1.03, duration: 0.3 }, 0.45)
+          // Phase 3 — everything fades out
+          .to(['#ss-thumb-tl','#ss-side-r1','#ss-side-r2'], { opacity: 0, duration: 0.2 }, 0.72)
+          .to('#ss-overlay',  { y: -20, opacity: 0, duration: 0.18 }, 0.74)
+          .to('#ss-center',   { scale: 1.12, opacity: 0, duration: 0.22, ease: 'power2.in' }, 0.74)
 
       }, wrapRef)
       return () => ctx.revert()
