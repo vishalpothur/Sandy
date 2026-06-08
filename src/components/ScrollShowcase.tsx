@@ -45,8 +45,8 @@ export default function ScrollShowcase() {
 
     mm.add('(min-width: 768px)', () => {
       const ctx = gsap.context(() => {
-        // All irises closed + rotated
-        gsap.set(['#photo-c','#photo-l','#photo-r'], { clipPath: CLOSED, rotation: -45, transformOrigin: '50% 50%' })
+        // Photos start OPEN — visible immediately
+        gsap.set(['#photo-c','#photo-l','#photo-r'], { clipPath: OPEN, rotation: 0, transformOrigin: '50% 50%' })
         gsap.set('#ring-c', { rotation: -60, opacity: 0, transformOrigin: '50% 50%' })
         gsap.set(['#ring-l','#ring-r'], { opacity: 0, transformOrigin: '50% 50%' })
         gsap.set(['#wrap-l','#wrap-r'], { opacity: 0 })
@@ -63,26 +63,21 @@ export default function ScrollShowcase() {
           },
         })
 
-        // Center iris opens like a shutter — polygon expands + rotates
+        // Ring spins in + side photos appear
         tl
           .to('#ring-c',  { rotation: 0, opacity: 1, duration: 0.3 }, 0)
-          .to('#photo-c', { clipPath: OPEN, rotation: 0, duration: 0.45, ease: 'power3.inOut' }, 0.04)
-
-        // Side irises open staggered
-          .to(['#wrap-l','#wrap-r'], { opacity: 1, duration: 0.2 }, 0.32)
-          .to(['#ring-l','#ring-r'], { opacity: 1, duration: 0.22 }, 0.34)
-          .to('#photo-l', { clipPath: OPEN, rotation: 0, duration: 0.32, ease: 'power2.inOut' }, 0.37)
-          .to('#photo-r', { clipPath: OPEN, rotation: 0, duration: 0.32, ease: 'power2.inOut' }, 0.43)
+          .to(['#wrap-l','#wrap-r'], { opacity: 1, duration: 0.25 }, 0.1)
+          .to(['#ring-l','#ring-r'], { opacity: 1, duration: 0.25 }, 0.12)
 
         // Text fades in
-          .to('#ss-label',   { opacity: 1, y: 0, duration: 0.2 }, 0.50)
-          .to('#ss-heading',  { opacity: 1, y: 0, duration: 0.22 }, 0.54)
-          .to('#ss-sub',     { opacity: 1, y: 0, duration: 0.18 }, 0.60)
+          .to('#ss-label',   { opacity: 1, y: 0, duration: 0.2 }, 0.25)
+          .to('#ss-heading', { opacity: 1, y: 0, duration: 0.22 }, 0.30)
+          .to('#ss-sub',     { opacity: 1, y: 0, duration: 0.18 }, 0.36)
 
         // Ring slowly ticks
-          .to('#ring-c', { rotation: 45, duration: 0.35 }, 0.50)
+          .to('#ring-c', { rotation: 45, duration: 0.4 }, 0.30)
 
-        // Irises close
+        // Irises close at end — shutter snaps shut
           .to(['#ss-label','#ss-heading','#ss-sub'], { opacity: 0, duration: 0.15 }, 0.76)
           .to('#photo-l', { clipPath: CLOSED, rotation: 45, duration: 0.22, ease: 'power3.in' }, 0.78)
           .to('#photo-r', { clipPath: CLOSED, rotation: 45, duration: 0.22, ease: 'power3.in' }, 0.80)
@@ -96,7 +91,7 @@ export default function ScrollShowcase() {
 
     mm.add('(max-width: 767px)', () => {
       const ctx = gsap.context(() => {
-        gsap.set('#photo-c', { clipPath: CLOSED, rotation: -45, transformOrigin: '50% 50%' })
+        gsap.set('#photo-c', { clipPath: OPEN, rotation: 0, transformOrigin: '50% 50%' })
         gsap.to('#photo-c', {
           clipPath: OPEN, rotation: 0, duration: 1, ease: 'power3.inOut',
           scrollTrigger: { trigger: wrapRef.current, start: 'top 80%', once: true },
