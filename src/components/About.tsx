@@ -7,10 +7,11 @@ import { openWhatsApp, serviceMessage } from '../utils/whatsapp'
 gsap.registerPlugin(ScrollTrigger)
 
 const milestones = [
-  { year: '2014', text: 'Started Sandy Photography with a single camera and a big dream' },
-  { year: '2017', text: 'Specialised in newborn & maternity photography' },
-  { year: '2020', text: 'Expanded to weddings & events across India' },
-  { year: '2024', text: '10,000+ precious memories captured for 500+ families' },
+  { year: '2014', text: 'Started Sandy Photography with a single camera and an enormous dream' },
+  { year: '2017', text: 'Specialised in newborn & maternity photography — my true calling' },
+  { year: '2020', text: 'Expanded into weddings & events, working with families across India' },
+  { year: '2023', text: 'Opened a dedicated studio with a fully heated newborn suite' },
+  { year: '2025', text: '10,000+ precious memories preserved for 500+ families' },
 ]
 
 export default function About() {

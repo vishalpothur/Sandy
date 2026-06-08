@@ -6,7 +6,8 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #fdfaf7; color: #3d2c2c; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: #fdfaf7; color: #3d2c2c; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+@media (max-width: 767px) { html { font-size: 15px; } }
 ::selection { background: #e8a59840; color: #c97b5a; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #f5f0eb; }

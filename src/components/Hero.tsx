@@ -72,12 +72,12 @@ export default function Hero() {
           </div>
 
           <div className="w-full lg:w-[45%] order-1 lg:order-2">
-            <div ref={imgRef} className="rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: '4/5' }}>
+            <div ref={imgRef} className="rounded-3xl overflow-hidden shadow-2xl mx-auto" style={{ aspectRatio: '4/5', maxWidth: '420px' }}>
               <img
                 src="/photos/kids-outdoor.jpg"
                 alt="Kids photography by Sandy"
-                className="w-full h-full object-cover"
-                onLoad={(e) => (e.target as HTMLImageElement).classList.add('loaded')}
+                className="w-full h-full object-cover loaded"
+                fetchPriority="high"
               />
             </div>
           </div>

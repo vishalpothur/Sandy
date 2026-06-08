@@ -3,6 +3,10 @@ import { useState, useEffect, useRef } from 'react'
 import Lightbox from './Lightbox'
 
 const allImages = [
+  // ── Newborn — Unsplash until Sandy's newborn photos are added ──
+  { id: 18, src: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80', title: 'Brand New',         category: 'Newborn',   aspect: '3/4' },
+  { id: 19, src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80', title: 'Tiny Fingers',    category: 'Newborn',   aspect: '3/4' },
+  { id: 20, src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80', title: 'First Dreams',    category: 'Newborn',   aspect: '4/3' },
   // ── Sandy's real photos ──
   { id: 1,  src: '/photos/kids-outdoor.jpg',    title: 'Little Explorer',   category: 'Kids',      aspect: '3/4' },
   { id: 2,  src: '/photos/kids-books.jpg',      title: 'Future Scholar',    category: 'Kids',      aspect: '3/4' },
@@ -26,7 +30,7 @@ const allImages = [
   { id: 17, src: 'https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=800&q=80', title: 'First Birthday',   category: 'Events',    aspect: '1/1' },
 ]
 
-const FILTERS = ['All', 'Kids', 'Maternity', 'Weddings', 'Events']
+const FILTERS = ['All', 'Newborn', 'Kids', 'Maternity', 'Weddings', 'Events']
 
 function GalleryItem({ image, index, onClick }: { image: typeof allImages[0]; index: number; onClick: (img: typeof allImages[0]) => void }) {
   const ref = useRef<HTMLDivElement>(null)

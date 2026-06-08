@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react'
 
 const testimonials = [
-  { name: 'Priya Sharma', role: 'Maternity Session', quote: "Sandy made me feel so beautiful and comfortable during my maternity shoot. The photos are absolutely stunning — I cry every time I look at them!", avatar: 'PS' },
-  { name: 'Rohit & Ananya', role: 'Wedding Photography', quote: "Our wedding photos are beyond anything we imagined. Sandy captured every emotion perfectly. We couldn't be happier!", avatar: 'RA' },
-  { name: 'Kavitha Reddy', role: 'Kids Session', quote: "My daughter was so shy at first, but Sandy had her giggling within minutes. The photos are so full of life and joy!", avatar: 'KR' },
-  { name: 'Meera Iyer', role: 'Birthday Event', quote: "Every single moment of my son's first birthday was captured beautifully. The turnaround was so quick too. Highly recommend!", avatar: 'MI' },
-  { name: 'Suresh & Lakshmi', role: 'Family Session', quote: "We've done three sessions with Sandy now and each one is more beautiful than the last. She truly has a gift!", avatar: 'SL' },
+  { name: 'Priya & Karthik', role: 'Newborn Session', quote: "Sandy photographed our son when he was just 7 days old. The images are so tender and so perfectly him. We will treasure them forever.", avatar: 'PK' },
+  { name: 'Divya Menon', role: 'Maternity Photography', quote: "I was nervous in front of the camera but Sandy made me feel like a goddess. Every photo is a work of art — I genuinely cry looking at them.", avatar: 'DM' },
+  { name: 'Kavitha Reddy', role: 'Kids Session', quote: "My daughter was completely shy at first, but Sandy had her giggling within minutes. The photos are so full of life and pure joy!", avatar: 'KR' },
+  { name: 'Arun & Sneha', role: 'Wedding Photography', quote: "Our wedding album is beyond anything we imagined. Sandy captured every emotion perfectly — the laughter, the tears, the love. Priceless.", avatar: 'AS' },
+  { name: 'Meera Iyer', role: 'First Birthday Event', quote: "Every single moment of my son's cake smash was captured beautifully. The turnaround was incredibly quick too. Highly recommend!", avatar: 'MI' },
 ]
 
 export default function Testimonials() {

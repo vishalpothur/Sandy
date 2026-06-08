@@ -9,36 +9,44 @@ gsap.registerPlugin(ScrollTrigger)
 
 const services = [
   {
+    emoji: '🍼',
+    title: 'Newborn Photography',
+    description: 'Those first ten days are fleeting and irreplaceable. Gentle, safe sessions that capture every tiny curl, yawn, and pout.',
+    price: '₹20,000',
+    features: ['First 5–14 days ideal', 'Safe posing & heated studio', 'Parents & siblings welcome', 'Heirloom gallery delivered'],
+    color: '#c97b5a',
+  },
+  {
     emoji: '🎠',
     title: 'Kids Photography',
-    description: 'Playful, candid, and full of personality. Studio or outdoor sessions designed to let kids be kids — giggles and all!',
+    description: 'Playful, candid, and bursting with personality. Studio or outdoor sessions where kids are free to just be kids — giggles and all.',
     price: '₹18,000',
-    features: ['All ages welcome', 'Studio or outdoor', 'Fun props & setups', 'Same-week delivery'],
+    features: ['All ages welcome', 'Studio or outdoor', 'Fun props & themed setups', 'Same-week digital delivery'],
     color: '#e8a598',
   },
   {
     emoji: '🌸',
     title: 'Maternity Photography',
-    description: 'Celebrate the most magical chapter. Beautiful bump portraits that capture the glow, the love, and the anticipation.',
+    description: 'Celebrate the most magical chapter of your life. Glowing bump portraits that honour the beauty, love, and anticipation you feel.',
     price: '₹25,000',
-    features: ['28–36 weeks ideal', 'Indoor or outdoor', 'Partner & kids welcome', 'Guided posing'],
+    features: ['28–36 weeks ideal', 'Indoor or outdoor', 'Partner & kids welcome', 'Expert posing guidance'],
     color: '#8fa68d',
   },
   {
     emoji: '💍',
     title: 'Wedding Photography',
-    description: 'Every smile, every tear, every first dance — captured forever with warmth and artistry.',
+    description: 'Every smile, every tear, every first dance — woven into a timeless story told with warmth and artistry.',
     price: '₹85,000',
-    features: ['Full day coverage', 'Candid & portraits', 'Pre-wedding shoot', 'Online gallery'],
-    color: '#c97b5a',
+    features: ['Full day candid coverage', 'Portraits & ceremonies', 'Pre-wedding shoot included', 'Premium online gallery'],
+    color: '#d4956a',
   },
   {
     emoji: '🎉',
     title: 'Event Photography',
-    description: "Birthday parties, naming ceremonies, milestones — if it's worth celebrating, it's worth photographing beautifully.",
+    description: 'Birthday parties, naming ceremonies, first steps — if it\'s worth celebrating, it\'s worth preserving beautifully.',
     price: '₹45,000',
-    features: ['Any celebration', '3–6 hour coverage', 'Quick turnaround', 'Group & candid shots'],
-    color: '#d4956a',
+    features: ['Any milestone or celebration', '3–6 hour coverage', 'Quick 48-hr turnaround', 'Candid & group shots'],
+    color: '#a08080',
   },
 ]
 
@@ -105,7 +113,7 @@ export default function Services() {
           </h2>
           <div className="w-16 h-0.5 bg-blush mx-auto" />
         </div>
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {services.map((service) => (
             <div key={service.title} className="service-item">
               <ServiceCard service={service} />
